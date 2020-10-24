@@ -5,13 +5,14 @@ const fs = require('fs');
 const multer = require('multer');
 const { v4: uuidv4 } = require('uuid');
 const db = require(__dirname + '/db_connect');
+const cors = require('cors');
 
 
+app.use(cors());
 //set top middleware
 //which to use is decided by header content-type
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
 
 
 app.use('/podcaster_dashboard',require(__dirname + '/routes/podcaster_dashboard'));

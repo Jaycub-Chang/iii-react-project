@@ -1,0 +1,43 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
+.podcastImgArea{
+    width: 6.75rem;
+    height: 6.75rem;
+}
+
+.podcastImgArea img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.table th,.table td{
+    border-top: 0;
+    border-bottom: 1px solid #dee2e6;
+    padding-top: 2rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
+hr{
+    border: 0.05rem solid #dee2e6;
+}
+
+.table {
+    table-layout: fixed;   // 表格和欄寬將根據所給定的寬度來顯示
+    min-width: 100%;     // 避免因寬度不足而字疊在一起（根據表格內容設定寬度）
+  }
+
+thead th:first-child,
+tbody th:first-child {
+  width: 20%;
+}
+
+tbody td:nth-child(0) {
+  width: 70%;
+}
+
+tbody td:last-child {
+  width: 10%;
+}

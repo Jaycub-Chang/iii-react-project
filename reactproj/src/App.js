@@ -4,7 +4,12 @@ import './App.css';
 
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 
-import Counter from './jay_pages/counter'
+//components
+import MyNavbar from './jay_components/MyNavbar.js';
+
+
+//pages
+import PodcasterDashboardHome from './jay_pages/PodcasterDashboardHome';
 
 
 function App() {
@@ -12,10 +17,10 @@ function App() {
     <Router>
       <>
 
-
+        <MyNavbar />
         <Switch>
-          <Route exact path="/">
-            <Counter id={1} />
+          <Route exact path="/:podcaster_id?">
+            <PodcasterDashboardHome />
           </Route>
         </Switch>
 
