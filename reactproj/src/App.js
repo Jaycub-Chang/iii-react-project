@@ -10,6 +10,7 @@ import MyNavbar from './jay_components/MyNavbar.js';
 
 //pages
 import PodcasterDashboardHome from './jay_pages/PodcasterDashboardHome';
+import AudioPlayer from './jay_components/AudioPlayer.js';
 
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
           </Route>
         </Switch>
 
-
+        <AudioPlayer />
       </>
     </Router>
   );
