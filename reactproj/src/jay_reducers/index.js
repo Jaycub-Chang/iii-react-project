@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 
-import counter from './counter.js';
-import setPodcasterDashboardInfoState from './setPodcasterDashboardInfoState';
+import podcasterDashboardInfoState from './podcasterDashboardInfoState';
+import podcasterAudioListState from './podcasterAudioListState';
 
 // 合併所有的reducers成一個大的reducer
 export const rootReducer = combineReducers({
-    counter,
-    setPodcasterDashboardInfoState,
+    podcasterDashboardInfoState,
+    podcasterAudioListState,
 });
 

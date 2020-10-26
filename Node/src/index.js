@@ -45,6 +45,6 @@ app.use((req, res) => {
 });
 
 app.listen(5566, function () {
-    console.log('啟動 server 偵聽埠號 3000');
+    console.log('啟動 server 偵聽埠號 5566');
 });
 

@@ -1,4 +1,4 @@
-
+import './../jay_styles/PodcasterDashboardHome.scss'
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 // 改用動作類型的常數
@@ -26,7 +26,7 @@ function PodcasterDashboardHome(props) {
           <button className="btn btn-primary btn-sm">更換封面</button>
         </div>
       </div>
-      <hr />
+      <hr className="dashboard-hr" />
       <div className="row justify-content-center custom-table-width">
         <table className="table col-10">
           <tbody>
@@ -74,7 +74,7 @@ function PodcasterDashboardHome(props) {
 }
 
 const mapStateToProps = (store) => {
-  return { channel_data: store.setPodcasterDashboardInfoState }
+  return { channel_data: store.podcasterDashboardInfoState }
 }
 
 // 原本的mapDispatchToProps

@@ -2,7 +2,7 @@ import { INIT_PODCASTER_DASHBOARD } from '../jay_actions/actionTypes'
 
 // action = { type: 'INIT_PODCASTER_DASHBOARD', payload: {...state} }
 
-export default function setPodcasterDashboardInfoState(state = {
+export default function podcasterDashboardInfoState(state = {
     sid: '',
     podcaster_id: '',
     channel_title: '',

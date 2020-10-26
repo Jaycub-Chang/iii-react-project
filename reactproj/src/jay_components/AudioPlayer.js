@@ -5,7 +5,6 @@ import 'react-jinke-music-player/assets/index.css'
 import { withRouter } from 'react-router-dom'
 
 
-
 function AudioPlayer(props) {
 
     const [audioLists, setAudioLists] = useState([{
@@ -22,10 +21,10 @@ function AudioPlayer(props) {
 
 
     return (
-        <div style={{ height: '80px' }}>
+        <div style={{ height: '100px' }}>
             <ReactJkMusicPlayer
                 mode={'full'}
-                defaultVolume="0.6"
+                defaultVolume= {0.6}
                 autoPlay={false}
                 defaultPosition={{ top: '80%', left: '90%' }}
                 quietUpdate

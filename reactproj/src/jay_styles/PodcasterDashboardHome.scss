@@ -11,8 +11,9 @@
     object-fit: cover;
 }
 
-.table th,.table td{
-    border-top: 0;
+div.custom-table-width .table th,
+div.custom-table-width .table td{
+    border-top: 0px;
     border-bottom: 1px solid #dee2e6;
     padding-top: 2rem;
     padding-left: 0.75rem;
@@ -20,8 +21,8 @@
     padding-bottom: 0.75rem;
 }
 
-hr{
-    border: 0.05rem solid #dee2e6;
+hr.dashboard-hr{
+    border: 1px solid #707070 ;
 }
 
 .table {
@@ -29,15 +30,11 @@ hr{
     min-width: 100%;     // 避免因寬度不足而字疊在一起（根據表格內容設定寬度）
   }
 
-thead th:first-child,
-tbody th:first-child {
-  width: 20%;
+tbody th:nth-child(0) {
+  width: 10%;
 }
 
-tbody td:nth-child(0) {
-  width: 70%;
-}
 
-tbody td:last-child {
+tbody td:nth-child(1) {
   width: 10%;
 }
