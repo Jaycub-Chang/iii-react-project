@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 
 // action、props
-import { initalAudioListAsync } from '../jay_actions/index'
+import { initalAudioListAsync, delAudioAsync } from '../jay_actions/index'
 import { withRouter, useParams } from 'react-router-dom'
 
 
@@ -45,9 +45,10 @@ function PodcasterAudioList(props) {
                         <button className="btn btn-primary btn-sm" onClick={(e) => {
                             e.preventDefault();
                             setModalShow(true);
-                            setModalData({ 
+                            setModalData({
                                 modalTitle: '新增單集',
-                                modalPodcasterId: podcaster_id, });
+                                modalPodcasterId: podcaster_id,
+                            });
                         }}>單集上傳</button>
                     </div>
                     <div className="text-center d-flex justify-content-center align-items-stretch">
@@ -81,7 +82,10 @@ function PodcasterAudioList(props) {
                                             setModalShow(true);
                                             setModalData({ modalTitle: '編輯單集' });
                                         }} href="javascript"><FaEdit /></a></td>
-                                        <td className="icon"><a onClick={(e) => e.preventDefault()} href="javascript"><FaTrash /></a></td>
+                                        <td className="icon"><a key={item.sid} onClick={(e) => {
+                                            e.preventDefault();
+                                            props.delAudioAsync(item.sid);
+                                        }} href="javascript"><FaTrash /></a></td>
                                     </tr>
                                 )
                             }
@@ -96,6 +100,7 @@ function PodcasterAudioList(props) {
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 modalData={modalData}
+                setIsLoading={setIsLoading}
             />
         </>
     );
@@ -118,5 +123,5 @@ const mapStateToProps = (store) => {
 
 // 綁定部份action creators
 // 注意：第二個傳入參數` { addValue, minusValue, addValueAsync }`是個物件值
-export default withRouter(connect(mapStateToProps, { initalAudioListAsync })(PodcasterAudioList));
+export default withRouter(connect(mapStateToProps, { initalAudioListAsync, delAudioAsync })(PodcasterAudioList));
 

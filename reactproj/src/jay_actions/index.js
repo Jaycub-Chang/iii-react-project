@@ -1,4 +1,4 @@
-import { INIT_PODCASTER_DASHBOARD, INIT_PODCASTER_AUDIO_LIST } from './actionTypes'
+import { INIT_PODCASTER_DASHBOARD, INIT_PODCASTER_AUDIO_LIST, DEL_PODCASTER_AUDIO } from './actionTypes'
 
 
 
@@ -51,7 +51,7 @@ export const initalAudioListAsync = (podcaster_id) => {
     const response = await fetch(request);
     const data = await response.json();
     // data會是一個物件值
-    console.log(data)
+    // console.log(data)
 
     //setTotal(data.total)
     // 最後得到資料，然後發送動作到reducer
@@ -61,3 +61,38 @@ export const initalAudioListAsync = (podcaster_id) => {
 };
 
 
+// 新增音檔
+export const addAudioAsync = (formData) => {
+  return async function addAudioSubmit(dispatch) {
+    console.log(formData);
+    const url = `http://localhost:5566/podcaster_dashboard/channel_audio/add/api`;
+    const request = new Request(url, {
+      method: 'POST',
+      body: formData,
+    })
+
+    const response = await fetch(request);
+    const data = await response.json();
+    // data會是一個物件值
+    console.log(data);
+
+  };
+};
+
+// 刪除音檔
+export const delAudioAsync = (audioSid) => {
+  return async function addAudioSubmit(dispatch, getState) {
+    const url = `http://localhost:5566/podcaster_dashboard/channel_audio/delete/api/${audioSid}`;
+    const request = new Request(url, {
+      method: 'GET',
+    })
+
+    const response = await fetch(request);
+    const data = await response.json();
+    console.log(data);
+
+    let newState = getState().podcasterAudioListState.filter((item) =>  item.sid !== audioSid );
+
+    dispatch(initalAudioList(newState))
+  };
+};

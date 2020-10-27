@@ -1,3 +1,5 @@
 Node/node_modules
 Node/.env
 reactproj/node_modules
+Node/public/audios
+Node/public/images

@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const fs = require('fs');
-const multer = require('multer');
 const { v4: uuidv4 } = require('uuid');
 const db = require(__dirname + '/db_connect');
 const cors = require('cors');
