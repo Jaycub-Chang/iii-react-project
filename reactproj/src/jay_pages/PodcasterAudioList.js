@@ -12,6 +12,7 @@ import { FaTrash, FaEdit } from 'react-icons/fa';
 // components
 import AudioEditModal from './../jay_components/AudioEditModal';
 import ScaleLoader from "react-spinners/ScaleLoader";
+import AudioAddModal from '../jay_components/AudioAddModal';
 
 //css
 import './../jay_styles/PodcasterAudioList.scss'
@@ -20,7 +21,8 @@ import { css } from "@emotion/core";
 
 function PodcasterAudioList(props) {
 
-    const [modalShow, setModalShow] = useState(false);
+    const [addModalShow, setAddModalShow] = useState(false);    
+    const [editModalShow, setEditModalShow] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [modalData, setModalData] = useState({});
 
@@ -29,7 +31,7 @@ function PodcasterAudioList(props) {
     useEffect(async () => {
         setIsLoading(true);
         await props.initalAudioListAsync(podcaster_id);
-        setTimeout(() => setIsLoading(false), 1000)
+        setTimeout(() => setIsLoading(false), 800)
     }, []);
 
 
@@ -44,10 +46,10 @@ function PodcasterAudioList(props) {
                     <div className="text-center">
                         <button className="btn btn-primary btn-sm" onClick={(e) => {
                             e.preventDefault();
-                            setModalShow(true);
+                            setAddModalShow(true);
                             setModalData({
                                 modalTitle: '新增單集',
-                                modalPodcasterId: podcaster_id,
+                                editTargetData: { podcaster_id: podcaster_id },
                             });
                         }}>單集上傳</button>
                     </div>
@@ -73,19 +75,30 @@ function PodcasterAudioList(props) {
                         <tbody>
                             {
                                 props.channel_audio_data.map((item) =>
-                                    <tr>
+                                    <tr key={item.sid}>
                                         <th scope="row">{item.sid}</th>
                                         <td>{item.audio_title}</td>
                                         <td>{item.pubDate}</td>
-                                        <td className="icon"><a onClick={(e) => {
-                                            e.preventDefault();
-                                            setModalShow(true);
-                                            setModalData({ modalTitle: '編輯單集' });
-                                        }} href="javascript"><FaEdit /></a></td>
-                                        <td className="icon"><a key={item.sid} onClick={(e) => {
-                                            e.preventDefault();
-                                            props.delAudioAsync(item.sid);
-                                        }} href="javascript"><FaTrash /></a></td>
+                                        <td className="icon"><a
+
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                setEditModalShow(true);
+                                                let editTargetData = null;
+                                                editTargetData = props.channel_audio_data.filter((v) => v.sid == item.sid);
+                                                setModalData({ modalTitle: '編輯單集', editTargetData: { ...editTargetData[0] } });
+
+                                            }} href="javascript"><FaEdit /></a></td>
+
+
+                                        <td className="icon"><a
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                setEditModalShow(true);
+                                                let editTargetData = null;
+                                                editTargetData = props.channel_audio_data.filter((v) => v.sid == item.sid);
+                                                setModalData({ modalTitle: '刪除單集', editTargetData: { ...editTargetData[0] } });
+                                            }} href="javascript"><FaTrash /></a></td>
                                     </tr>
                                 )
                             }
@@ -97,9 +110,18 @@ function PodcasterAudioList(props) {
             </div>
 
             <AudioEditModal
-                show={modalShow}
-                onHide={() => setModalShow(false)}
+                show={editModalShow}
+                onHide={() => setEditModalShow(false)}
                 modalData={modalData}
+                setModalData={setModalData}
+                setIsLoading={setIsLoading}
+            />
+
+            <AudioAddModal 
+                show={addModalShow}
+                onHide={() => setAddModalShow(false)}
+                modalData={modalData}
+                setModalData={setModalData}
                 setIsLoading={setIsLoading}
             />
         </>

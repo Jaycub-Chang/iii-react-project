@@ -10,7 +10,7 @@ const extMap = {
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, __dirname + '/../../public/audios/');
+        cb(null, __dirname + '/../../../reactproj/public/audios/');
     },
     filename: function (req, file, cb) {
         let ext = extMap[file.mimetype];

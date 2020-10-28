@@ -57,4 +57,16 @@ router.get('/channel_audio/delete/api/:sid?', async (req, res) => {
 });
 
 
+// 修改單集
+router.post('/channel_audio/edit/api/', uploadAudio.single('audio_file'), async (req, res) => {
+
+    const sql = "UPDATE `podcast_audio` SET `audio_file`=?,`audio_title`=?,`audio_content`=?,`audio_content_snippet`=? WHERE `sid`=?";
+
+    const { audio_file, audio_title, audio_content, audio_content_snippet, sid } = { ...req.body };
+    const [results] = await db.query(sql, [audio_file, audio_title, audio_content, audio_content_snippet, sid]);
+
+    res.json([req.body,req.file]);
+});
+
+
 module.exports = router;

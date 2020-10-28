@@ -96,3 +96,23 @@ export const delAudioAsync = (audioSid) => {
     dispatch(initalAudioList(newState))
   };
 };
+
+
+// 修改音檔
+export const editAudioAsync = (formData) => {
+  return async function addAudioSubmit(dispatch) {
+    console.log(formData);
+    const url = `http://localhost:5566/podcaster_dashboard/channel_audio/edit/api/`;
+    const request = new Request(url, {
+      method: 'POST',
+      body: formData,
+    })
+
+    const response = await fetch(request);
+    const data = await response.json();
+    // data會是一個物件值
+    console.log(data);
+
+  };
+};
+
