@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 
 // action、props
-import { initalAudioListAsync, delAudioAsync } from '../jay_actions/index'
+import { initalAudioListAsync, delAudioAsync, addAudioToPlaylistAndPlay } from '../jay_actions/index'
 import { withRouter, useParams } from 'react-router-dom'
 
 
 // react icon 
 import { FaTrash, FaEdit } from 'react-icons/fa';
+import { AiFillPlayCircle } from 'react-icons/ai';
 
 // components
 import AudioEditModal from './../jay_components/AudioEditModal';
@@ -21,17 +22,20 @@ import { css } from "@emotion/core";
 
 function PodcasterAudioList(props) {
 
-    const [addModalShow, setAddModalShow] = useState(false);    
+    const [addModalShow, setAddModalShow] = useState(false);
     const [editModalShow, setEditModalShow] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [modalData, setModalData] = useState({});
 
     let { podcaster_id } = useParams();
 
-    useEffect(async () => {
+    useEffect(() => {
         setIsLoading(true);
-        await props.initalAudioListAsync(podcaster_id);
-        setTimeout(() => setIsLoading(false), 800)
+        async function fetchInitData() {
+            await props.initalAudioListAsync(podcaster_id);
+            setTimeout(() => setIsLoading(false), 800);
+        };
+        fetchInitData();
     }, []);
 
 
@@ -68,6 +72,7 @@ function PodcasterAudioList(props) {
                                 <th >序號</th>
                                 <th >單集名稱</th>
                                 <th >上傳日期</th>
+                                <th >播放</th>
                                 <th >編輯</th>
                                 <th >刪除</th>
                             </tr>
@@ -79,13 +84,29 @@ function PodcasterAudioList(props) {
                                         <th scope="row">{item.sid}</th>
                                         <td>{item.audio_title}</td>
                                         <td>{item.pubDate}</td>
+                                        <td className="icon" style={{ fontSize: '1.6rem' }}><a href="javascript"
+                                            onClick={(event) => {
+                                                event.preventDefault();
+                                                let editTargetData = null;
+                                                [editTargetData] = props.channel_audio_data.filter((v) => v.sid === item.sid);
+
+                                                let payload = {
+                                                    musicSrc: ((editTargetData.audio_file).indexOf('http') != -1) ? editTargetData.audio_file : `http://localhost:3000/audios/${editTargetData.audio_file}`,
+                                                    cover: editTargetData.podcaster_img,
+                                                    name: editTargetData.audio_title,
+                                                    singer: editTargetData.channel_title,
+                                                };
+                                                addAudioToPlaylistAndPlay(payload);
+                                                console.log(payload);
+                                            }}
+                                        ><AiFillPlayCircle /></a></td>
                                         <td className="icon"><a
 
                                             onClick={(e) => {
                                                 e.preventDefault();
                                                 setEditModalShow(true);
                                                 let editTargetData = null;
-                                                editTargetData = props.channel_audio_data.filter((v) => v.sid == item.sid);
+                                                editTargetData = props.channel_audio_data.filter((v) => v.sid === item.sid);
                                                 setModalData({ modalTitle: '編輯單集', editTargetData: { ...editTargetData[0] } });
 
                                             }} href="javascript"><FaEdit /></a></td>
@@ -96,7 +117,7 @@ function PodcasterAudioList(props) {
                                                 e.preventDefault();
                                                 setEditModalShow(true);
                                                 let editTargetData = null;
-                                                editTargetData = props.channel_audio_data.filter((v) => v.sid == item.sid);
+                                                editTargetData = props.channel_audio_data.filter((v) => v.sid === item.sid);
                                                 setModalData({ modalTitle: '刪除單集', editTargetData: { ...editTargetData[0] } });
                                             }} href="javascript"><FaTrash /></a></td>
                                     </tr>
@@ -117,7 +138,7 @@ function PodcasterAudioList(props) {
                 setIsLoading={setIsLoading}
             />
 
-            <AudioAddModal 
+            <AudioAddModal
                 show={addModalShow}
                 onHide={() => setAddModalShow(false)}
                 modalData={modalData}
@@ -140,10 +161,10 @@ function PodcasterAudioList(props) {
 
 
 const mapStateToProps = (store) => {
-    return { channel_audio_data: store.podcasterAudioListState }
+    return { channel_audio_data: store.podcasterAudioListState, audioPlayerList: store.audioPlayerList }
 }
 
 // 綁定部份action creators
 // 注意：第二個傳入參數` { addValue, minusValue, addValueAsync }`是個物件值
-export default withRouter(connect(mapStateToProps, { initalAudioListAsync, delAudioAsync })(PodcasterAudioList));
+export default withRouter(connect(mapStateToProps, { initalAudioListAsync, delAudioAsync, addAudioToPlaylistAndPlay })(PodcasterAudioList));
 

@@ -17,7 +17,6 @@ function AudioAddModal(props) {
         event.preventDefault();
         setIsLoading(true);
         const formData = new FormData(event.target);
-        formData.append("audio_file", modalData.editTargetData.audio_file);
 
         await props.addAudioAsync(formData);
         await props.initalAudioListAsync(modalData.editTargetData.podcaster_id);
@@ -41,7 +40,7 @@ function AudioAddModal(props) {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <form className="container" name="audioForm" onSubmit={handleSubmit}>
+                    <form className="container" name="audioForm" onSubmit={handleSubmit} >
                         <input type="text" className="form-control" aria-describedby="emailHelp"
                             value={(modalData.editTargetData) ? modalData.editTargetData.podcaster_id : ''}
                             style={{ display: 'none' }} name="podcaster_id" />

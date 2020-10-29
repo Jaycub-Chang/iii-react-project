@@ -28,10 +28,11 @@ thead th:first-child,
  
 thead th:nth-child(2),
 tbody td:nth-child(0) {
-    width: 50%;
+    width: 40%;
 }
 
-thead th:nth-child(4){
+thead th:nth-child(4),
+thead th:nth-child(5){
     width: 10%;
 }
 

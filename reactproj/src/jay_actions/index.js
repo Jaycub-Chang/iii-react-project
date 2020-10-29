@@ -1,4 +1,4 @@
-import { INIT_PODCASTER_DASHBOARD, INIT_PODCASTER_AUDIO_LIST, DEL_PODCASTER_AUDIO } from './actionTypes'
+import { INIT_PODCASTER_DASHBOARD, INIT_PODCASTER_AUDIO_LIST, ADD_AUDIO_TO_PLAYLIST_AND_PLAY } from './actionTypes'
 
 
 
@@ -64,7 +64,6 @@ export const initalAudioListAsync = (podcaster_id) => {
 // 新增音檔
 export const addAudioAsync = (formData) => {
   return async function addAudioSubmit(dispatch) {
-    console.log(formData);
     const url = `http://localhost:5566/podcaster_dashboard/channel_audio/add/api`;
     const request = new Request(url, {
       method: 'POST',
@@ -91,7 +90,7 @@ export const delAudioAsync = (audioSid) => {
     const data = await response.json();
     console.log(data);
 
-    let newState = getState().podcasterAudioListState.filter((item) =>  item.sid !== audioSid );
+    let newState = getState().podcasterAudioListState.filter((item) => item.sid !== audioSid);
 
     dispatch(initalAudioList(newState))
   };
@@ -101,8 +100,7 @@ export const delAudioAsync = (audioSid) => {
 // 修改音檔
 export const editAudioAsync = (formData) => {
   return async function addAudioSubmit(dispatch) {
-    console.log(formData);
-    const url = `http://localhost:5566/podcaster_dashboard/channel_audio/edit/api/`;
+    const url = `http://localhost:5566/podcaster_dashboard/channel_audio/edit/api`;
     const request = new Request(url, {
       method: 'POST',
       body: formData,
@@ -112,7 +110,13 @@ export const editAudioAsync = (formData) => {
     const data = await response.json();
     // data會是一個物件值
     console.log(data);
-
   };
+};
+
+
+// 新增到撥放列表  且  撥放
+export const addAudioToPlaylistAndPlay = (payload) => {
+  console.log(payload);
+  return { type: ADD_AUDIO_TO_PLAYLIST_AND_PLAY, payload: payload }
 };
 

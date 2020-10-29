@@ -11,6 +11,10 @@ const { v4: uuidv4 } = require('uuid');
 const db = require(__dirname + '/../db_connect');
 
 const router = express.Router();
+const cors = require('cors');
+
+
+app.use(cors());
 
 router.get('/', (req, res) => {
     res.send('podcaster_dashboard');
@@ -30,7 +34,7 @@ router.get('/channel_info/api/:podcaster_id?', async (req, res) => {
 // 播客頻道所有單集
 router.get('/channel_audio/api/:podcaster_id?', async (req, res) => {
 
-    const sql = "SELECT * FROM `podcast_audio` WHERE podcaster_id=? ORDER BY `sid` DESC";
+    const sql = "SELECT a.`channel_title`,a.`podcaster_img`,b.* FROM `podcast_channel_info` AS a left join `podcast_audio` AS b on a.`podcaster_id`=b.`podcaster_id` WHERE a.`podcaster_id` =? ORDER BY `sid` DESC";
     const [results] = await db.query(sql, [req.params.podcaster_id]);
     res.send(results);
 });
@@ -60,12 +64,18 @@ router.get('/channel_audio/delete/api/:sid?', async (req, res) => {
 // 修改單集
 router.post('/channel_audio/edit/api/', uploadAudio.single('audio_file'), async (req, res) => {
 
-    const sql = "UPDATE `podcast_audio` SET `audio_file`=?,`audio_title`=?,`audio_content`=?,`audio_content_snippet`=? WHERE `sid`=?";
+    if (req.file) {
+        const sql = "UPDATE `podcast_audio` SET `audio_file`=?,`audio_title`=?,`audio_content`=?,`audio_content_snippet`=? WHERE `sid`=?";
+        const { audio_file, audio_title, audio_content, audio_content_snippet, sid } = { ...req.body };
+        const [results] = await db.query(sql, [req.file.filename, audio_title, audio_content, audio_content_snippet, sid]);
+    }else{
+        const sql = "UPDATE `podcast_audio` SET `audio_title`=?,`audio_content`=?,`audio_content_snippet`=? WHERE `sid`=?";
+        const { audio_file, audio_title, audio_content, audio_content_snippet, sid } = { ...req.body };
+        const [results] = await db.query(sql, [ audio_title, audio_content, audio_content_snippet, sid]);
+    };
 
-    const { audio_file, audio_title, audio_content, audio_content_snippet, sid } = { ...req.body };
-    const [results] = await db.query(sql, [audio_file, audio_title, audio_content, audio_content_snippet, sid]);
 
-    res.json([req.body,req.file]);
+    res.json([req.body, req.file]);
 });
 
 

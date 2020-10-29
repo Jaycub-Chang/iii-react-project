@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import 'react-jinke-music-player/assets/index.css'
 
 // action、props
-import { initalAudioListAsync, editAudioAsync,delAudioAsync } from '../jay_actions/index'
+import { initalAudioListAsync, editAudioAsync, delAudioAsync } from '../jay_actions/index'
 import { withRouter } from 'react-router-dom'
 
 // bootstrap
@@ -15,6 +15,8 @@ function AudioEditModal(props) {
 
     const [initFormText, setInitFormText] = useState(null);
 
+    const [selectedFile, setSelectedFile] = useState(null);
+
     useEffect(() => {
         setInitFormText(modalData.editTargetData);
     }, [modalData]);
@@ -22,7 +24,9 @@ function AudioEditModal(props) {
     const handleSubmit = async (event) => {
         event.preventDefault();
         setIsLoading(true);
+
         const formData = new FormData(event.target);
+
         await props.editAudioAsync(formData);
         await props.initalAudioListAsync(modalData.editTargetData.podcaster_id);
         props.onHide();
@@ -33,12 +37,20 @@ function AudioEditModal(props) {
         let copyInitFormText = { ...initFormText };
         copyInitFormText[event.target.name] = event.target.value;
         setInitFormText(copyInitFormText);
+        console.log(initFormText);
     };
 
-    const handelDelete = async(event) =>{
+    const handelDelete = async (event) => {
         await props.delAudioAsync(initFormText.sid);
         props.onHide();
     };
+
+    const handelFile = (event) => {
+        console.log(event.target.files);
+        setSelectedFile(event.target.files[0]);
+    };
+
+
 
     const displayDelModel = (
         <>
@@ -51,6 +63,7 @@ function AudioEditModal(props) {
                 </div>
                 <Modal.Body>
                     <h6>你確定要刪除序號第 <span className="text-danger"> {(initFormText) ? initFormText.sid : ''} </span> 的檔案？</h6>
+                    <h6>單集名稱： <span className="text-danger"> {(initFormText) ? initFormText.audio_title : ''} </span> </h6>
                 </Modal.Body>
                 <Modal.Footer>
                     <button className="btn btn-danger" onClick={handelDelete}>確認刪除</button>
@@ -73,7 +86,7 @@ function AudioEditModal(props) {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <form className="container" name="audioForm" onSubmit={handleSubmit}>
+                    <form className="container" name="audioForm" onSubmit={handleSubmit} method="post" enctype="multipart/form-data">
                         <input type="text" className="form-control" aria-describedby="emailHelp"
                             value={(initFormText) ? initFormText.sid : ''}
                             style={{ display: 'none' }} name="sid" />
@@ -103,7 +116,7 @@ function AudioEditModal(props) {
                         </div>
                         <div className="form-group">
                             <h6>選擇音檔</h6>
-                            <input type="file" className="form-control-file" name="audio_file" />
+                            <input type="file" className="form-control-file" name="audio_file" onChange={handelFile} />
                         </div>
                         <Modal.Footer>
                             <button type="submit" className="btn btn-primary">確認送出</button>
@@ -123,6 +136,6 @@ const mapStateToProps = (store) => {
 }
 
 
-export default withRouter(connect(mapStateToProps, { initalAudioListAsync, editAudioAsync,delAudioAsync })(AudioEditModal));
+export default withRouter(connect(mapStateToProps, { initalAudioListAsync, editAudioAsync, delAudioAsync })(AudioEditModal));
 
 
