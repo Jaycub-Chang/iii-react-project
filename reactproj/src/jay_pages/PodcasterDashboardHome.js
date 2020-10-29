@@ -1,5 +1,5 @@
 import './../jay_styles/PodcasterDashboardHome.scss'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 // 改用動作類型的常數
 //import { ADD_VALUE, MINUS_VALUE } from '../actions/actionTypes'

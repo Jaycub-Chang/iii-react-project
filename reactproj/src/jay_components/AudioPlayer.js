@@ -9,27 +9,27 @@ import { addAudioToPlaylistAndPlay } from '../jay_actions/index'
 
 function AudioPlayer(props) {
 
-    const [audioLists, setAudioLists] = useState([])
+    // 用redux改變的store不會更新元件，所以用上層傳參數
+    const { globalAudioArry } = props;
+    const [audioLists, setAudioLists] = useState([]);
+    const [autoPlayState, setAutoPlayState] = useState(false);
+    const [clearPriorAudioListsState, setClearPriorAudioListsState] = useState(true);
 
+    // 馬上撥放
     useEffect(() => {
-        // setAudioLists(props.audioPlayerList);
-        console.log(props.audioPlayerList);
-    }, []);
-
-    useEffect(() => {
-        // setAudioLists(props.audioPlayerList);
-        console.log(props.audioPlayerList);
-    }, [props.audioPlayerList]);
+        setAudioLists(globalAudioArry);
+        setAutoPlayState(true);
+    }, [globalAudioArry])
 
     return (
         <div style={{ height: '100px' }}>
             <ReactJkMusicPlayer
                 mode={'full'}
                 defaultVolume={0.6}
-                autoPlay={false}
+                autoPlay={autoPlayState}
                 defaultPosition={{ top: '80%', left: '90%' }}
                 quietUpdate
-                clearPriorAudioLists
+                clearPriorAudioLists={clearPriorAudioListsState}
                 audioLists={audioLists}
             />
         </div>

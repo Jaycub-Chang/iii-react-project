@@ -1,5 +1,4 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
@@ -15,6 +14,9 @@ import PodcasterAudioList from './jay_pages/PodcasterAudioList.js';
 
 
 function App() {
+
+  const [globalAudioArry, setGlobalAudioArry] = useState([]);
+
   return (
     <Router>
       <>
@@ -25,11 +27,11 @@ function App() {
             <PodcasterDashboardHome />
           </Route>
           <Route exact path="/channel_audio_list/:podcaster_id?">
-            <PodcasterAudioList />
+            <PodcasterAudioList globalAudioArry={globalAudioArry} setGlobalAudioArry={setGlobalAudioArry} />
           </Route>
         </Switch>
 
-        <AudioPlayer />
+        <AudioPlayer globalAudioArry={globalAudioArry} setGlobalAudioArry={setGlobalAudioArry} />
       </>
     </Router>
   );

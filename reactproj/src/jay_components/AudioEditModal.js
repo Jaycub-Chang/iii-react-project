@@ -15,8 +15,6 @@ function AudioEditModal(props) {
 
     const [initFormText, setInitFormText] = useState(null);
 
-    const [selectedFile, setSelectedFile] = useState(null);
-
     useEffect(() => {
         setInitFormText(modalData.editTargetData);
     }, [modalData]);
@@ -44,12 +42,6 @@ function AudioEditModal(props) {
         await props.delAudioAsync(initFormText.sid);
         props.onHide();
     };
-
-    const handelFile = (event) => {
-        console.log(event.target.files);
-        setSelectedFile(event.target.files[0]);
-    };
-
 
 
     const displayDelModel = (
@@ -116,7 +108,7 @@ function AudioEditModal(props) {
                         </div>
                         <div className="form-group">
                             <h6>選擇音檔</h6>
-                            <input type="file" className="form-control-file" name="audio_file" onChange={handelFile} />
+                            <input type="file" className="form-control-file" name="audio_file" />
                         </div>
                         <Modal.Footer>
                             <button type="submit" className="btn btn-primary">確認送出</button>

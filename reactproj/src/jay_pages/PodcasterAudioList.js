@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 
 // action、props
-import { initalAudioListAsync, delAudioAsync, addAudioToPlaylistAndPlay } from '../jay_actions/index'
+import { initalAudioListAsync, delAudioAsync } from '../jay_actions/index'
 import { withRouter, useParams } from 'react-router-dom'
 
 
@@ -21,6 +21,8 @@ import { css } from "@emotion/core";
 
 
 function PodcasterAudioList(props) {
+
+    const { globalAudioArry, setGlobalAudioArry } = props;
 
     const [addModalShow, setAddModalShow] = useState(false);
     const [editModalShow, setEditModalShow] = useState(false);
@@ -89,29 +91,23 @@ function PodcasterAudioList(props) {
                                                 event.preventDefault();
                                                 let editTargetData = null;
                                                 [editTargetData] = props.channel_audio_data.filter((v) => v.sid === item.sid);
-
                                                 let payload = {
                                                     musicSrc: ((editTargetData.audio_file).indexOf('http') != -1) ? editTargetData.audio_file : `http://localhost:3000/audios/${editTargetData.audio_file}`,
                                                     cover: editTargetData.podcaster_img,
                                                     name: editTargetData.audio_title,
                                                     singer: editTargetData.channel_title,
                                                 };
-                                                addAudioToPlaylistAndPlay(payload);
-                                                console.log(payload);
+                                                setGlobalAudioArry([payload])
                                             }}
                                         ><AiFillPlayCircle /></a></td>
                                         <td className="icon"><a
-
                                             onClick={(e) => {
                                                 e.preventDefault();
                                                 setEditModalShow(true);
                                                 let editTargetData = null;
                                                 editTargetData = props.channel_audio_data.filter((v) => v.sid === item.sid);
                                                 setModalData({ modalTitle: '編輯單集', editTargetData: { ...editTargetData[0] } });
-
                                             }} href="javascript"><FaEdit /></a></td>
-
-
                                         <td className="icon"><a
                                             onClick={(e) => {
                                                 e.preventDefault();
@@ -161,10 +157,10 @@ function PodcasterAudioList(props) {
 
 
 const mapStateToProps = (store) => {
-    return { channel_audio_data: store.podcasterAudioListState, audioPlayerList: store.audioPlayerList }
+    return { channel_audio_data: store.podcasterAudioListState }
 }
 
 // 綁定部份action creators
 // 注意：第二個傳入參數` { addValue, minusValue, addValueAsync }`是個物件值
-export default withRouter(connect(mapStateToProps, { initalAudioListAsync, delAudioAsync, addAudioToPlaylistAndPlay })(PodcasterAudioList));
+export default withRouter(connect(mapStateToProps, { initalAudioListAsync, delAudioAsync })(PodcasterAudioList));
 

@@ -1,4 +1,4 @@
-import { INIT_PODCASTER_DASHBOARD, INIT_PODCASTER_AUDIO_LIST, ADD_AUDIO_TO_PLAYLIST_AND_PLAY } from './actionTypes'
+import { INIT_PODCASTER_DASHBOARD, INIT_PODCASTER_AUDIO_LIST } from './actionTypes'
 
 
 
@@ -20,11 +20,7 @@ export const initalDashboardAsync = (podcaster_id) => {
 
     const response = await fetch(request);
     const data = await response.json();
-    // data會是一個物件值
-    console.log(data)
 
-    //setTotal(data.total)
-    // 最後得到資料，然後發送動作到reducer
     dispatch(initalDashboard(data[0]))
 
   };
@@ -50,11 +46,7 @@ export const initalAudioListAsync = (podcaster_id) => {
 
     const response = await fetch(request);
     const data = await response.json();
-    // data會是一個物件值
-    // console.log(data)
 
-    //setTotal(data.total)
-    // 最後得到資料，然後發送動作到reducer
     dispatch(initalAudioList(data))
   };
 
@@ -72,7 +64,6 @@ export const addAudioAsync = (formData) => {
 
     const response = await fetch(request);
     const data = await response.json();
-    // data會是一個物件值
     console.log(data);
 
   };
@@ -114,9 +105,4 @@ export const editAudioAsync = (formData) => {
 };
 
 
-// 新增到撥放列表  且  撥放
-export const addAudioToPlaylistAndPlay = (payload) => {
-  console.log(payload);
-  return { type: ADD_AUDIO_TO_PLAYLIST_AND_PLAY, payload: payload }
-};
 
