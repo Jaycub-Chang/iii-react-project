@@ -8,12 +8,13 @@ import { withRouter, useParams } from 'react-router-dom'
 
 // react icon 
 import { FaTrash, FaEdit } from 'react-icons/fa';
-import { AiFillPlayCircle } from 'react-icons/ai';
+import { AiFillPlayCircle, AiOutlineToTop } from 'react-icons/ai';
 
 // components
 import AudioEditModal from './../jay_components/AudioEditModal';
 import ScaleLoader from "react-spinners/ScaleLoader";
 import AudioAddModal from '../jay_components/AudioAddModal';
+import ScrollToTop from "react-scroll-to-top";
 
 //css
 import './../jay_styles/PodcasterAudioList.scss'
@@ -28,6 +29,8 @@ function PodcasterAudioList(props) {
     const [editModalShow, setEditModalShow] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [modalData, setModalData] = useState({});
+    const [useFilter, setUseFilter] = useState(false);
+    const [filterText, setFilterText] = useState(null);
 
     let { podcaster_id } = useParams();
 
@@ -41,12 +44,14 @@ function PodcasterAudioList(props) {
     }, []);
 
 
+
     const loader_css = css`
         display:inline-block;
     `;
 
     const displayAudioList = (
         <>
+            <ScrollToTop smooth style={{ bottom: '120px',right:'80px' }} component={<AiOutlineToTop style={{fontSize:'1.8rem'}} />} />
             <div className="container">
                 <div className="row d-flex justify-content-around mt-3 align-items-center">
                     <div className="text-center">
@@ -60,11 +65,12 @@ function PodcasterAudioList(props) {
                         }}>單集上傳</button>
                     </div>
                     <div className="text-center d-flex justify-content-center align-items-stretch">
-                        <input placeholder="單集關鍵字" className="search-input " />
-                        <button className="btn btn-primary btn-sm search-btn" onClick={(e) => e.preventDefault()}>搜尋</button>
-                    </div>
-                    <div className="text-center">
-                        <button className="btn btn-danger btn-sm" onClick={(e) => e.preventDefault()}>多集刪除</button>
+                        <input placeholder="單集關鍵字" className="search-input " value={filterText} onChange={(e) => { setFilterText(e.target.value.trim()) }} />
+                        <button className="btn btn-primary btn-sm search-btn"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setUseFilter(true);
+                            }}>搜尋</button>
                     </div>
                 </div>
                 <div className="row justify-content-center custom-table-width">
@@ -81,8 +87,13 @@ function PodcasterAudioList(props) {
                         </thead>
                         <tbody>
                             {
-                                props.channel_audio_data.map((item) =>
-                                    <tr key={item.sid}>
+                                props.channel_audio_data.map((item) => {
+                                    if (useFilter) {
+                                        if (item.audio_title.indexOf(filterText) === -1) {
+                                            return null;
+                                        };
+                                    };
+                                    return (<tr key={item.sid}>
                                         <th scope="row">{item.sid}</th>
                                         <td>{item.audio_title}</td>
                                         <td>{item.pubDate}</td>
@@ -116,7 +127,10 @@ function PodcasterAudioList(props) {
                                                 editTargetData = props.channel_audio_data.filter((v) => v.sid === item.sid);
                                                 setModalData({ modalTitle: '刪除單集', editTargetData: { ...editTargetData[0] } });
                                             }} href="javascript"><FaTrash /></a></td>
-                                    </tr>
+                                    </tr>)
+                                }
+
+
                                 )
                             }
 

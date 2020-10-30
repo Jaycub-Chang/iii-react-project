@@ -4,8 +4,6 @@ import ReactJkMusicPlayer from 'react-jinke-music-player'
 import 'react-jinke-music-player/assets/index.css'
 import { withRouter } from 'react-router-dom'
 
-// action、props
-import { addAudioToPlaylistAndPlay } from '../jay_actions/index'
 
 function AudioPlayer(props) {
 
@@ -13,7 +11,6 @@ function AudioPlayer(props) {
     const { globalAudioArry } = props;
     const [audioLists, setAudioLists] = useState([]);
     const [autoPlayState, setAutoPlayState] = useState(false);
-    const [clearPriorAudioListsState, setClearPriorAudioListsState] = useState(true);
 
     // 馬上撥放
     useEffect(() => {
@@ -29,7 +26,7 @@ function AudioPlayer(props) {
                 autoPlay={autoPlayState}
                 defaultPosition={{ top: '80%', left: '90%' }}
                 quietUpdate
-                clearPriorAudioLists={clearPriorAudioListsState}
+                clearPriorAudioLists
                 audioLists={audioLists}
             />
         </div>
@@ -41,4 +38,4 @@ const mapStateToProps = (store) => {
 }
 
 
-export default withRouter(connect(mapStateToProps, { addAudioToPlaylistAndPlay })(AudioPlayer));
+export default withRouter(connect(mapStateToProps)(AudioPlayer));

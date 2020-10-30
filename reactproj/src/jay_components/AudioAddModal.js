@@ -43,7 +43,7 @@ function AudioAddModal(props) {
                     <form className="container" name="audioForm" onSubmit={handleSubmit} >
                         <input type="text" className="form-control" aria-describedby="emailHelp"
                             value={(modalData.editTargetData) ? modalData.editTargetData.podcaster_id : ''}
-                            style={{ display: 'none' }} name="podcaster_id" />
+                            style={{ display: 'none' }} name="podcaster_id" readOnly={true}/>
                         <div className="form-group">
                             <h6>單集名稱：</h6>
                             <input type="text" className="form-control" aria-describedby="emailHelp" name="audio_title" />
@@ -58,7 +58,7 @@ function AudioAddModal(props) {
                         </div>
                         <div className="form-group">
                             <h6>選擇音檔</h6>
-                            <input type="file" className="form-control-file" name="audio_file" />
+                            <input type="file" className="form-control-file" name="audio_file" required={true}/>
                         </div>
                         <Modal.Footer>
                             <button type="submit" className="btn btn-primary">確認送出</button>

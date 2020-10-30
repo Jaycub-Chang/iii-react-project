@@ -80,10 +80,10 @@ function AudioEditModal(props) {
                 <Modal.Body>
                     <form className="container" name="audioForm" onSubmit={handleSubmit} method="post" enctype="multipart/form-data">
                         <input type="text" className="form-control" aria-describedby="emailHelp"
-                            value={(initFormText) ? initFormText.sid : ''}
+                            value={(initFormText) ? initFormText.sid : ''} readOnly={true}
                             style={{ display: 'none' }} name="sid" />
                         <input type="text" className="form-control" aria-describedby="emailHelp"
-                            value={(initFormText) ? initFormText.podcaster_id : ''}
+                            value={(initFormText) ? initFormText.podcaster_id : ''} readOnly={true}
                             style={{ display: 'none' }} name="podcaster_id" />
                         <div className="form-group">
                             <h6>單集名稱：</h6>
