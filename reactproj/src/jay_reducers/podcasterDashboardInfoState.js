@@ -1,8 +1,9 @@
-import { INIT_PODCASTER_DASHBOARD } from '../jay_actions/actionTypes'
+import { INIT_PODCASTER_DASHBOARD } from '../jay_actions/actionTypes';
 
 // action = { type: 'INIT_PODCASTER_DASHBOARD', payload: {...state} }
 
-export default function podcasterDashboardInfoState(state = {
+export default function podcasterDashboardInfoState(
+  state = {
     sid: '',
     podcaster_id: '',
     channel_title: '',
@@ -17,12 +18,14 @@ export default function podcasterDashboardInfoState(state = {
     subscribe_number: '',
     subscribe_record: '',
     visitor_views: '',
-    created_date: ''
-}, action) {
-    switch (action.type) {
-        case INIT_PODCASTER_DASHBOARD:
-            return action.payload;
-        default:
-            return state
-    }
+    created_date: '',
+  },
+  action
+) {
+  switch (action.type) {
+    case INIT_PODCASTER_DASHBOARD:
+      return action.payload;
+    default:
+      return state;
+  }
 }

@@ -1,20 +1,18 @@
-import './../jay_styles/PodcasterDashboardHome.scss'
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
+import './../jay_styles/PodcasterDashboardHome.scss';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 // 改用動作類型的常數
 //import { ADD_VALUE, MINUS_VALUE } from '../actions/actionTypes'
 // 導入actions/index.js中，這個元件只需要一部份的action creators
-import { initalDashboardAsync } from '../jay_actions/index'
-import { withRouter, useParams } from 'react-router-dom'
+import { initalDashboardAsync } from '../jay_actions/index';
+import { withRouter, useParams } from 'react-router-dom';
 
 function PodcasterDashboardHome(props) {
-
   let { podcaster_id } = useParams();
 
   useEffect(() => {
     props.initalDashboardAsync(podcaster_id);
   }, []);
-
 
   return (
     <div className="container">
@@ -32,50 +30,64 @@ function PodcasterDashboardHome(props) {
           <tbody>
             <tr>
               <th scope="row">頻道編號</th>
-              <td >{props.channel_data.podcaster_id}</td>
-              <td ><a href="#">編輯</a></td>
+              <td>{props.channel_data.podcaster_id}</td>
+              <td>
+                <a href="#">編輯</a>
+              </td>
             </tr>
             <tr>
-              <th scope="row" >頻道名稱</th>
-              <td >{props.channel_data.channel_title}</td>
-              <td ><a href="#">編輯</a></td>
+              <th scope="row">頻道名稱</th>
+              <td>{props.channel_data.channel_title}</td>
+              <td>
+                <a href="#">編輯</a>
+              </td>
             </tr>
             <tr>
               <th scope="row">簡介</th>
-              <td >{props.channel_data.channel_summary}</td>
-              <td ><a href="#">編輯</a></td>
+              <td>{props.channel_data.channel_summary}</td>
+              <td>
+                <a href="#">編輯</a>
+              </td>
             </tr>
             <tr>
-              <th scope="row" >詳細內容</th>
-              <td >{props.channel_data.podcaster_description}</td>
-              <td ><a href="#">編輯</a></td>
+              <th scope="row">詳細內容</th>
+              <td>{props.channel_data.podcaster_description}</td>
+              <td>
+                <a href="#">編輯</a>
+              </td>
             </tr>
             <tr>
-              <th scope="row" >頻道類別</th>
-              <td >{props.channel_data.channel_catagory}</td>
-              <td ><a href="#">編輯</a></td>
+              <th scope="row">頻道類別</th>
+              <td>{props.channel_data.channel_catagory}</td>
+              <td>
+                <a href="#">編輯</a>
+              </td>
             </tr>
             <tr>
-              <th scope="row" >RSS連結</th>
+              <th scope="row">RSS連結</th>
 
-              <td >{props.channel_data.channel_rss_link}</td>
-              <td ><a href="#">編輯</a></td>
+              <td>{props.channel_data.channel_rss_link}</td>
+              <td>
+                <a href="#">編輯</a>
+              </td>
             </tr>
             <tr>
-              <th scope="row" >聯絡信箱</th>
-              <td >{props.channel_data.owner_email}</td>
-              <td ><a href="#">編輯</a></td>
+              <th scope="row">聯絡信箱</th>
+              <td>{props.channel_data.owner_email}</td>
+              <td>
+                <a href="#">編輯</a>
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-  )
+  );
 }
 
 const mapStateToProps = (store) => {
-  return { channel_data: store.podcasterDashboardInfoState }
-}
+  return { channel_data: store.podcasterDashboardInfoState };
+};
 
 // 原本的mapDispatchToProps
 // const mapDispatchToProps = (dispatch) =>{
@@ -84,5 +96,6 @@ const mapStateToProps = (store) => {
 
 // 綁定部份action creators
 // 注意：第二個傳入參數` { addValue, minusValue, addValueAsync }`是個物件值
-export default withRouter(connect(mapStateToProps, { initalDashboardAsync })(PodcasterDashboardHome));
-
+export default withRouter(
+  connect(mapStateToProps, { initalDashboardAsync })(PodcasterDashboardHome)
+);

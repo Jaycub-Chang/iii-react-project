@@ -1,11 +1,11 @@
-import { INIT_PODCASTER_DASHBOARD, INIT_PODCASTER_AUDIO_LIST } from './actionTypes'
-
-
+import {
+  INIT_PODCASTER_DASHBOARD,
+  INIT_PODCASTER_AUDIO_LIST,
+} from './actionTypes';
 
 export const initalDashboard = (payload) => {
-  return { type: INIT_PODCASTER_DASHBOARD, payload: payload }
+  return { type: INIT_PODCASTER_DASHBOARD, payload: payload };
 };
-
 
 export const initalDashboardAsync = (podcaster_id) => {
   return async function getChannelInfo(dispatch) {
@@ -16,22 +16,18 @@ export const initalDashboardAsync = (podcaster_id) => {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       }),
-    })
+    });
 
     const response = await fetch(request);
     const data = await response.json();
 
-    dispatch(initalDashboard(data[0]))
-
+    dispatch(initalDashboard(data[0]));
   };
-
 };
-
 
 export const initalAudioList = (payload) => {
-  return { type: INIT_PODCASTER_AUDIO_LIST, payload: payload }
+  return { type: INIT_PODCASTER_AUDIO_LIST, payload: payload };
 };
-
 
 export const initalAudioListAsync = (podcaster_id) => {
   return async function getChannelAudioList(dispatch) {
@@ -42,16 +38,14 @@ export const initalAudioListAsync = (podcaster_id) => {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       }),
-    })
+    });
 
     const response = await fetch(request);
     const data = await response.json();
 
-    dispatch(initalAudioList(data))
+    dispatch(initalAudioList(data));
   };
-
 };
-
 
 // 新增音檔
 export const addAudioAsync = (formData) => {
@@ -60,12 +54,11 @@ export const addAudioAsync = (formData) => {
     const request = new Request(url, {
       method: 'POST',
       body: formData,
-    })
+    });
 
     const response = await fetch(request);
     const data = await response.json();
     console.log(data);
-
   };
 };
 
@@ -75,18 +68,19 @@ export const delAudioAsync = (audioSid) => {
     const url = `http://localhost:5566/podcaster_dashboard/channel_audio/delete/api/${audioSid}`;
     const request = new Request(url, {
       method: 'GET',
-    })
+    });
 
     const response = await fetch(request);
     const data = await response.json();
     console.log(data);
 
-    let newState = getState().podcasterAudioListState.filter((item) => item.sid !== audioSid);
+    let newState = getState().podcasterAudioListState.filter(
+      (item) => item.sid !== audioSid
+    );
 
-    dispatch(initalAudioList(newState))
+    dispatch(initalAudioList(newState));
   };
 };
-
 
 // 修改音檔
 export const editAudioAsync = (formData) => {
@@ -95,7 +89,7 @@ export const editAudioAsync = (formData) => {
     const request = new Request(url, {
       method: 'POST',
       body: formData,
-    })
+    });
 
     const response = await fetch(request);
     const data = await response.json();
@@ -103,6 +97,3 @@ export const editAudioAsync = (formData) => {
     console.log(data);
   };
 };
-
-
-
