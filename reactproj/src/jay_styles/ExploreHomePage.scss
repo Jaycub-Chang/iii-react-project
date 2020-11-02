@@ -18,12 +18,34 @@
     margin: 0;
 }
 
+
 .cate-img-area{
     overflow: hidden;
+    color: #F8F8F8;
 }
 
 .cate-img-area img{
     width: 100%;
     height: 12rem;
     object-fit: cover;
+    filter: brightness(0.5) contrast(0.8);
+    transition: 0.5s;
+}
+
+.cate-img-area:hover img{
+    filter: brightness(0.2) contrast(0.6) blur(3px);
+    transform: scale(1.15);
+}
+
+.cate-img-area:hover .cate-icon-layer{
+    font-size: 6rem;
+}
+
+.position-absolute.cate-icon-layer{
+    color: #F8F8F8;
+    font-size: 5rem;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: 0.5s;
 }

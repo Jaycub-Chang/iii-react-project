@@ -6,110 +6,216 @@ import { initalDashboardAsync } from '../jay_actions/index';
 import { withRouter } from 'react-router-dom';
 
 //components
-import Breadcrumb from 'react-bootstrap/Breadcrumb';
+import { fadeInUp } from 'react-animations';
+import Radium, { StyleRoot } from 'radium';
 
 // react icon
 import { RiMusic2Fill } from 'react-icons/ri';
+import {
+  FaRegNewspaper,
+  FaWalking,
+  FaBook,
+  FaSuitcase,
+  FaGraduationCap,
+} from 'react-icons/fa';
+import { CgSmartphoneChip } from 'react-icons/cg';
+import { GiPartyFlags, GiHealthNormal } from 'react-icons/gi';
 
 function PodcasterDashboardHome(props) {
+  const styles = {
+    fadeInUp01: {
+      animation: '2s',
+      animationName: Radium.keyframes(fadeInUp, 'fadeInUp'),
+    },
+    fadeInUp02: {
+      animation: '2.4s',
+      animationName: Radium.keyframes(fadeInUp, 'fadeInUp'),
+    },
+    fadeInUp03: {
+      animation: '2.8s',
+      animationName: Radium.keyframes(fadeInUp, 'fadeInUp'),
+    },
+    fadeInUp04: {
+      animation: '3.2s',
+      animationName: Radium.keyframes(fadeInUp, 'fadeInUp'),
+    },
+    fadeInUp05: {
+      animation: '3.6s',
+      animationName: Radium.keyframes(fadeInUp, 'fadeInUp'),
+    },
+    fadeInUp06: {
+      animation: '4s',
+      animationName: Radium.keyframes(fadeInUp, 'fadeInUp'),
+    },
+    fadeInUp07: {
+      animation: '4.4s',
+      animationName: Radium.keyframes(fadeInUp, 'fadeInUp'),
+    },
+    fadeInUp08: {
+      animation: '4.8s',
+      animationName: Radium.keyframes(fadeInUp, 'fadeInUp'),
+    },
+  };
+
   return (
-    <div className="explorePageBody py-4">
-      <div className="container">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb bg-transparent">
-            <li class="breadcrumb-item now-page" aria-current="page">
-              <RiMusic2Fill style={{ fontSize: '1.5rem' }} className="mx-1" />
-              探索
-            </li>
-          </ol>
-        </nav>
-        <div className="section-title-area py-2 px-3 col-2">
-          <h5>探索分類</h5>
-        </div>
-        <div className="row d-flex ">
-          <div className="col-md-3 col-6 cate-img-area py-3">
-            <a
-              href="javascript"
-              onClick={(event) => {
-                event.preventDefault();
-              }}
-            >
-              <img src="http://localhost:3000/images/explore_categories/pexels-sahidin-sahidin-2695975.jpg" />
-            </a>
+    <StyleRoot>
+      <div className="explorePageBody py-4">
+        <div className="container">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent">
+              <li class="breadcrumb-item now-page" aria-current="page">
+                <RiMusic2Fill style={{ fontSize: '1.5rem' }} className="mx-1" />
+                探索
+              </li>
+            </ol>
+          </nav>
+          <div className="section-title-area py-2 px-3 col-2">
+            <h5>探索分類</h5>
           </div>
-          <div className="col-md-3 col-6 cate-img-area py-3">
-            <a
-              href="javascript"
-              onClick={(event) => {
-                event.preventDefault();
-              }}
+          <div className="row d-flex mb-5">
+            <div
+              className="col-md-3 col-6 cate-img-area py-3 position-relative"
+              style={styles.fadeInUp01}
             >
-              <img src="http://localhost:3000/images/explore_categories/board-22098_1920.jpg" />
-            </a>
+              <a
+                href="javascript"
+                onClick={(event) => {
+                  event.preventDefault();
+                }}
+              >
+                <img src="http://localhost:3000/images/explore_categories/pexels-sahidin-sahidin-2695975.jpg" />
+                <div className="position-absolute cate-icon-layer">
+                  <FaRegNewspaper />
+                  <h3 className=" text-center mt-1">新聞</h3>
+                </div>
+              </a>
+            </div>
+            <div
+              className="col-md-3 col-6 cate-img-area py-3 position-relative"
+              style={styles.fadeInUp02}
+            >
+              <a
+                href="javascript"
+                onClick={(event) => {
+                  event.preventDefault();
+                }}
+              >
+                <img src="http://localhost:3000/images/explore_categories/board-22098_1920.jpg" />
+                <div className="position-absolute cate-icon-layer">
+                  <CgSmartphoneChip />
+                  <h3 className=" text-center mt-1">科技</h3>
+                </div>
+              </a>
+            </div>
+            <div
+              className="col-md-3 col-6 cate-img-area py-3 position-relative"
+              style={styles.fadeInUp03}
+            >
+              <a
+                href="javascript"
+                onClick={(event) => {
+                  event.preventDefault();
+                }}
+              >
+                <img src="http://localhost:3000/images/explore_categories/sport.jpg" />
+                <div className="position-absolute cate-icon-layer">
+                  <FaWalking />
+                  <h3 className=" text-center mt-1">運動</h3>
+                </div>
+              </a>
+            </div>
+            <div
+              className="col-md-3 col-6 cate-img-area py-3 position-relative"
+              style={styles.fadeInUp04}
+            >
+              <a
+                href="javascript"
+                onClick={(event) => {
+                  event.preventDefault();
+                }}
+              >
+                <img src="http://localhost:3000/images/explore_categories/pexels-teddy-2263410.jpg" />
+                <div className="position-absolute cate-icon-layer">
+                  <GiPartyFlags />
+                  <h3 className=" text-center mt-1">活動</h3>
+                </div>
+              </a>
+            </div>
+            <div
+              className="col-md-3 col-6 cate-img-area py-3 position-relative"
+              style={styles.fadeInUp05}
+            >
+              <a
+                href="javascript"
+                onClick={(event) => {
+                  event.preventDefault();
+                }}
+              >
+                <img src="http://localhost:3000/images/explore_categories/story02.jpg" />
+                <div className="position-absolute cate-icon-layer">
+                  <FaBook />
+                  <h3 className=" text-center mt-1">故事</h3>
+                </div>
+              </a>
+            </div>
+            <div
+              className="col-md-3 col-6 cate-img-area py-3 position-relative"
+              style={styles.fadeInUp06}
+            >
+              <a
+                href="javascript"
+                onClick={(event) => {
+                  event.preventDefault();
+                }}
+              >
+                <img src="http://localhost:3000/images/explore_categories/dices-over-newspaper-2656028_1920.jpg" />
+                <div className="position-absolute cate-icon-layer">
+                  <FaSuitcase />
+                  <h3 className=" text-center mt-1">商業</h3>
+                </div>
+              </a>
+            </div>
+            <div
+              className="col-md-3 col-6 cate-img-area py-3 position-relative"
+              style={styles.fadeInUp07}
+            >
+              <a
+                href="javascript"
+                onClick={(event) => {
+                  event.preventDefault();
+                }}
+              >
+                <img src="http://localhost:3000/images/explore_categories/book-1822474_1920.jpg" />
+                <div className="position-absolute cate-icon-layer">
+                  <FaGraduationCap />
+                  <h3 className=" text-center mt-1">教育</h3>
+                </div>
+              </a>
+            </div>
+            <div
+              className="col-md-3 col-6 cate-img-area py-3 position-relative"
+              style={styles.fadeInUp08}
+            >
+              <a
+                href="javascript"
+                onClick={(event) => {
+                  event.preventDefault();
+                }}
+              >
+                <img src="http://localhost:3000/images/explore_categories/salad-2756467_1920.jpg" />
+                <div className="position-absolute cate-icon-layer">
+                  <GiHealthNormal />
+                  <h3 className=" text-center mt-1">健康</h3>
+                </div>
+              </a>
+            </div>
           </div>
-          <div className="col-md-3 col-6 cate-img-area py-3">
-            <a
-              href="javascript"
-              onClick={(event) => {
-                event.preventDefault();
-              }}
-            >
-              <img src="http://localhost:3000/images/explore_categories/sport.jpg" />
-            </a>
-          </div>
-          <div className="col-md-3 col-6 cate-img-area py-3">
-            <a
-              href="javascript"
-              onClick={(event) => {
-                event.preventDefault();
-              }}
-            >
-              <img src="http://localhost:3000/images/explore_categories/pexels-teddy-2263410.jpg" />
-            </a>
-          </div>
-          <div className="col-md-3 col-6 cate-img-area py-3">
-            <a
-              href="javascript"
-              onClick={(event) => {
-                event.preventDefault();
-              }}
-            >
-              <img src="http://localhost:3000/images/explore_categories/story02.jpg" />
-            </a>
-          </div>
-          <div className="col-md-3 col-6 cate-img-area py-3">
-            <a
-              href="javascript"
-              onClick={(event) => {
-                event.preventDefault();
-              }}
-            >
-              <img src="http://localhost:3000/images/explore_categories/dices-over-newspaper-2656028_1920.jpg" />
-            </a>
-          </div>
-          <div className="col-md-3 col-6 cate-img-area py-3">
-            <a
-              href="javascript"
-              onClick={(event) => {
-                event.preventDefault();
-              }}
-            >
-              <img src="http://localhost:3000/images/explore_categories/book-1822474_1920.jpg" />
-            </a>
-          </div>
-          <div className="col-md-3 col-6 cate-img-area py-3">
-            <a
-              href="javascript"
-              onClick={(event) => {
-                event.preventDefault();
-              }}
-            >
-              <img src="http://localhost:3000/images/explore_categories/salad-2756467_1920.jpg" />
-            </a>
+          <div className="section-title-area py-2 px-3 col-2">
+            <h5>熱門頻道排行</h5>
           </div>
         </div>
       </div>
-    </div>
+    </StyleRoot>
   );
 }
 
