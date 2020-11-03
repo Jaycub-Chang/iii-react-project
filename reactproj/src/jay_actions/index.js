@@ -1,6 +1,7 @@
 import {
   INIT_PODCASTER_DASHBOARD,
   INIT_PODCASTER_AUDIO_LIST,
+  INIT_EXPLORE_HOMEPAGE,
 } from './actionTypes';
 
 export const initalDashboard = (payload) => {
@@ -95,5 +96,27 @@ export const editAudioAsync = (formData) => {
     const data = await response.json();
     // data會是一個物件值
     console.log(data);
+  };
+};
+
+//初始化探索頁面
+export const initalExploreHomePage = (payload) => {
+  return { type: INIT_EXPLORE_HOMEPAGE, payload: payload };
+};
+
+export const initalExploreHomePageAsync = () => {
+  return async function getExploreHomePageData(dispatch) {
+    const url = `http://localhost:5566/explore/popular_channels`;
+    const request = new Request(url, {
+      method: 'GET',
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    });
+
+    const response = await fetch(request);
+    const data = await response.json();
+    dispatch(initalExploreHomePage(data));
   };
 };

@@ -16,6 +16,8 @@ app.use(express.json());
 
 app.use('/podcaster_dashboard',require(__dirname + '/routes/podcaster_dashboard'));
 
+app.use('/explore',require(__dirname + '/routes/explore'));
+
 app.get('/', function (req, res) {
     // res.send('Hello World!');
     res.send('已開啟express')

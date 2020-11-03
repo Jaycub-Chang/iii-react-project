@@ -77,14 +77,14 @@ function PodcasterAudioList(props) {
               <div className="text-center d-flex justify-content-center align-items-stretch">
                 <input
                   placeholder="單集關鍵字"
-                  className="search-input "
+                  className="jay-search-input"
                   value={filterText}
                   onChange={(e) => {
                     setFilterText(e.target.value.trim());
                   }}
                 />
                 <button
-                  className="btn btn-primary btn-sm search-btn"
+                  className="btn btn-primary btn-sm jay-search-btn"
                   onClick={(e) => {
                     e.preventDefault();
                     setUseFilter(true);
@@ -95,7 +95,7 @@ function PodcasterAudioList(props) {
               </div>
             </div>
             <div className=" justify-content-center custom-table-width">
-              <table className="table col-10 table-hover">
+              <table className="table col-10 table-hover jay-table">
                 <thead>
                   <tr>
                     <th>序號</th>
@@ -118,7 +118,7 @@ function PodcasterAudioList(props) {
                         <th scope="row">{item.sid}</th>
                         <td>{item.audio_title}</td>
                         <td>{item.pubDate}</td>
-                        <td className="icon" style={{ fontSize: '1.6rem' }}>
+                        <td className="jay-icon" style={{ fontSize: '1.6rem' }}>
                           <a
                             href="javascript"
                             onClick={(event) => {
@@ -131,7 +131,7 @@ function PodcasterAudioList(props) {
                               );
                               let payload = {
                                 musicSrc:
-                                  editTargetData.audio_file.indexOf('http') !=
+                                  editTargetData.audio_file.indexOf('http') !==
                                   -1
                                     ? editTargetData.audio_file
                                     : `http://localhost:3000/audios/${editTargetData.audio_file}`,
@@ -211,7 +211,7 @@ function PodcasterAudioList(props) {
     </>
   );
   const displaySpinner = (
-    <div className="spinnerArea">
+    <div className="jay-spinnerArea">
       <ScaleLoader
         css={loader_css}
         color={'#4A90E2'}

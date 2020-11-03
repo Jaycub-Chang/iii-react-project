@@ -17,16 +17,16 @@ function PodcasterDashboardHome(props) {
   return (
     <div className="container">
       <div className="row justify-content-center">
-        <div className="podcastImgArea my-3">
+        <div className="jay-podcastImgArea my-3">
           <img src={props.channel_data.podcaster_img} alt="" />
         </div>
         <div className="col-12 text-center">
           <button className="btn btn-primary btn-sm">更換封面</button>
         </div>
       </div>
-      <hr className="dashboard-hr" />
+      <hr className="jay-dashboard-hr" />
       <div className="row justify-content-center custom-table-width">
-        <table className="table col-10">
+        <table className="table col-10 jay-table">
           <tbody>
             <tr>
               <th scope="row">頻道編號</th>

@@ -1,8 +1,8 @@
 @import '~bootstrap/scss/bootstrap.scss';
 
 
-div.custom-table-width .table th,
-div.custom-table-width .table td{
+div.custom-table-width .jay-table th,
+div.custom-table-width .jay-table td{
     border-top: 0px;
     border-bottom: 1px solid #dee2e6;
     padding-top: 2rem;
@@ -15,52 +15,52 @@ hr.dashboard-hr{
     border: 1px solid #707070 ;
 }
 
-.table {
+.jay-table {
     table-layout: fixed;   
     min-width: 100%;     
 }
 
 
-thead th:first-child,
-  tbody th:first-child {
+.jay-table thead th:first-child,
+.jay-table tbody th:first-child {
     width: 10%;
 }
  
-thead th:nth-child(2),
-tbody td:nth-child(0) {
+.jay-table thead th:nth-child(2),
+.jay-table tbody td:nth-child(0) {
     width: 40%;
 }
 
-thead th:nth-child(4),
-thead th:nth-child(5){
+.jay-table thead th:nth-child(4),
+.jay-table thead th:nth-child(5){
     width: 10%;
 }
 
 
-thead th:last-child,
-tbody td:last-child {
+.jay-table thead th:last-child,
+.jay-table tbody td:last-child {
     width: 10%;
 }
 
 
 
-button.btn.btn-primary.btn-sm.search-btn{
+button.btn.btn-primary.btn-sm.jay-search-btn{
     border-radius: 0px 0.2rem 0.2rem 0px;
     width: 4rem;
     height: 100%;
 }
-input.search-input{
+input.jay-search-input{
     border-radius: 0.2rem 0rem 0rem 0.2rem;
     border: 1px solid #dee2e6;
 }
 
 
-.icon{
+.jay-icon{
     font-size: 1.25rem;
 }
 
 
-.spinnerArea{
+.jay-spinnerArea{
     display: flex;
     justify-content: center;
     padding-top: 10rem;

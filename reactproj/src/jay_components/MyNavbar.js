@@ -1,35 +1,30 @@
-import React, { useState, useEffect } from 'react'
-import { Navbar, Nav } from 'react-bootstrap'
+import React, { useState, useEffect } from 'react';
+import { Navbar, Nav } from 'react-bootstrap';
 
 // 選單連結要使用NavLink取代Link
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
 
 function MyNavbar(props) {
-    return (
-        <>
-            <Navbar
-                collapseOnSelect
-                expand="lg"
-                bg="dark"
-                variant="dark"
-            >
-                <Navbar.Brand href="#home">播客後台管理</Navbar.Brand>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav className="mr-auto">
-                        {/* 把Nav.Link作為NavLink來使用 */}
-                        {/* 一定要加上exact，不然首頁會一直點亮(active) */}
-                        <Nav.Link as={NavLink} to="/" exact>
-                            計數器
+  return (
+    <>
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Navbar.Brand href="#home">播客後台管理</Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="mr-auto">
+            {/* 把Nav.Link作為NavLink來使用 */}
+            {/* 一定要加上exact，不然首頁會一直點亮(active) */}
+            <Nav.Link as={NavLink} to="/" exact>
+              計數器
             </Nav.Link>
-                        <Nav.Link as={NavLink} to="/cart">
-                            沒用的項目
+            <Nav.Link as={NavLink} to="/cart">
+              沒用的項目
             </Nav.Link>
-                    </Nav>
-                </Navbar.Collapse>
-            </Navbar>
-        </>
-    )
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    </>
+  );
 }
 
 export default MyNavbar;

@@ -17,7 +17,7 @@ function AudioPlayer(props) {
   }, [globalAudioArry]);
 
   return (
-    <div style={{ height: '100px' }}>
+    <div>
       <ReactJkMusicPlayer
         mode={'full'}
         defaultVolume={0.6}
