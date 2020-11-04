@@ -59,6 +59,7 @@ function ExploreCateChannelPage(props) {
   };
 
   const imgUrlArray = [];
+
   function preLoadImgs() {
     props.cate_channels.forEach((item) => {
       imgUrlArray.push(item.podcaster_img);
