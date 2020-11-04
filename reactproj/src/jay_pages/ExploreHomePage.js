@@ -1,6 +1,6 @@
 import './../jay_styles/ExploreHomePage.scss';
 import 'animate.css/animate.min.css';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 import { initalExploreHomePageAsync } from '../jay_actions/index';
@@ -9,6 +9,8 @@ import { withRouter, Link } from 'react-router-dom';
 //components
 import { fadeInUp, fadeIn } from 'react-animations';
 import Radium, { StyleRoot } from 'radium';
+import ScaleLoader from 'react-spinners/ScaleLoader';
+import { css } from '@emotion/core';
 
 // react icon
 import { RiMusic2Fill } from 'react-icons/ri';
@@ -62,14 +64,47 @@ function ExploreHomePage(props) {
     },
   };
 
+  const [isLoading, setIsLoading] = useState(false);
+
+  const imgUrlArray = [
+    'http://localhost:3000/images/explore_categories/pexels-sahidin-sahidin-2695975.jpg',
+    'http://localhost:3000/images/explore_categories/board-22098_1920.jpg',
+    'http://localhost:3000/images/explore_categories/sport.jpg',
+    'http://localhost:3000/images/explore_categories/pexels-teddy-2263410.jpg',
+    'http://localhost:3000/images/explore_categories/story02.jpg',
+    'http://localhost:3000/images/explore_categories/dices-over-newspaper-2656028_1920.jpg',
+    'http://localhost:3000/images/explore_categories/book-1822474_1920.jpg',
+    'http://localhost:3000/images/explore_categories/salad-2756467_1920.jpg',
+  ];
+
+  function preLoadImgs() {
+    props.popular_channel.forEach((item) => {
+      imgUrlArray.push(item.podcaster_img);
+    });
+    let tempImgUrlArray = [];
+    for (let i = 0; i < imgUrlArray.length + 8; i++) {
+      tempImgUrlArray[i] = new Image();
+      tempImgUrlArray[i].src = imgUrlArray[i];
+      console.log(tempImgUrlArray);
+    }
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+  }
+
   useEffect(() => {
+    setIsLoading(true);
     async function initialGetData() {
       await props.initalExploreHomePageAsync();
     }
     initialGetData();
   }, []);
 
-  return (
+  useEffect(() => {
+    preLoadImgs();
+  }, [props.popular_channel]);
+
+  const displayExploreHomePage = (
     <StyleRoot>
       <div className="explorePageBody pt-4" style={{ paddingBottom: '100px' }}>
         <div className="container">
@@ -295,36 +330,36 @@ function ExploreHomePage(props) {
                 return null;
               }
               return (
-                <div key={index}>
-                  <a
-                    href="javascript"
-                    onClick={(event) => {
-                      event.preventDefault();
-                    }}
-                    style={{
-                      display: 'block',
-                      zIndex: '100',
-                      width: '20%',
-                    }}
-                  >
-                    <div className="col-6 col-lg d-flex jay-channel-rating-section2 py-3 px-3 mh14">
-                      <div className="jay-section2-part1">
-                        <div className="jay-number-circle-area position-relative">
-                          <h6 className=" position-absolute">{index + 1}</h6>
-                        </div>
-                      </div>
-                      <div className="jay-section2-part2">
-                        <div className="jay-channel-rating-pic-part2">
-                          <img src={item.podcaster_img} alt="" />
-                        </div>
-                      </div>
-                      <div className="jay-section2-part3">
-                        <h6>{item.channel_title}</h6>
-                        <span>{item.channel_catagory}</span>
+                <a
+                  className="jay-rank-6-10-btn"
+                  key={index}
+                  href="javascript"
+                  onClick={(event) => {
+                    event.preventDefault();
+                  }}
+                  style={{
+                    display: 'block',
+                    zIndex: '100',
+                    width: '20%',
+                  }}
+                >
+                  <div className="col-6 col-lg d-flex jay-channel-rating-section2 py-3 px-3 mh14">
+                    <div className="jay-section2-part1">
+                      <div className="jay-number-circle-area position-relative">
+                        <h6 className=" position-absolute">{index + 1}</h6>
                       </div>
                     </div>
-                  </a>
-                </div>
+                    <div className="jay-section2-part2">
+                      <div className="jay-channel-rating-pic-part2">
+                        <img src={item.podcaster_img} alt="" />
+                      </div>
+                    </div>
+                    <div className="jay-section2-part3">
+                      <h6>{item.channel_title}</h6>
+                      <span>{item.channel_catagory}</span>
+                    </div>
+                  </div>
+                </a>
               );
             })}
           </div>
@@ -332,6 +367,25 @@ function ExploreHomePage(props) {
       </div>
     </StyleRoot>
   );
+
+  const loader_css = css`
+    display: inline-block;
+  `;
+
+  const displaySpinner = (
+    <div className="jay-spinnerArea explorePageBody">
+      <ScaleLoader
+        css={loader_css}
+        color={'#4A90E2'}
+        height={80}
+        width={10}
+        margin={6}
+        radius={20}
+      />
+    </div>
+  );
+
+  return isLoading ? displaySpinner : displayExploreHomePage;
 }
 
 const mapStateToProps = (store) => {

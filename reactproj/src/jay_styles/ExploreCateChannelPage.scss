@@ -45,6 +45,7 @@
     height: 4rem;
     overflow: hidden;
     border-radius: 5px;
+    filter: brightness(0.9);
 }
 .jay-hot-list-cate-channel-info{
     max-width: 50%;
@@ -58,18 +59,23 @@
     width: 9rem;
     height: 9rem;
     overflow: hidden;
+    transition: .3s;
+    filter: brightness(0.9);
 }
 
+.cate-all-channel-pic:hover{
+    filter: brightness(1);
+    transform: scale(1.05);
+}
 .jay-hot-list-cate-channel-pic img,
 .cate-all-channel-pic img{
     width: 100%;
     object-fit: cover;
 }
-
-.jay-hot-list-cate-channel-btn{
+.jay-border-line{
     border-bottom:  1px solid rgba($color: #F8F8F8, $alpha: 0.8);
-    color: #F8F8F8;
 }
+.jay-hot-list-cate-channel-btn,
 .jay-hot-list-cate-channel-btn:hover{
     text-decoration: none;
     color: #F8F8F8;

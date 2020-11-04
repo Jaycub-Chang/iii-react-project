@@ -58,17 +58,34 @@ function ExploreCateChannelPage(props) {
     }
   };
 
+  const imgUrlArray = [];
+  function preLoadImgs() {
+    props.cate_channels.forEach((item) => {
+      imgUrlArray.push(item.podcaster_img);
+    });
+    let tempImgUrlArray = [];
+    for (let i = 0; i < imgUrlArray.length; i++) {
+      tempImgUrlArray[i] = new Image();
+      tempImgUrlArray[i].src = imgUrlArray[i];
+      // console.log(tempImgUrlArray);
+    }
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+  }
+
   useEffect(() => {
     setIsLoading(true);
     async function initialGetData() {
       transTermToChinese();
       await props.initalExploreCatePageAsync(cate_term);
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 1000);
     }
     initialGetData();
   }, []);
+
+  useEffect(() => {
+    preLoadImgs();
+  }, [props.cate_channels]);
 
   const displayCatePage = (
     <StyleRoot>
@@ -115,7 +132,7 @@ function ExploreCateChannelPage(props) {
                   </a>
                 </div>
               </div>
-              <div className="px-3 py-2 jay-hot-list-cate-channel">
+              <div className=" jay-hot-list-cate-channel">
                 {props.cate_channels.map((item, index) => {
                   if (index > 8) {
                     return null;
@@ -123,21 +140,23 @@ function ExploreCateChannelPage(props) {
                   return (
                     <div key={index} style={styles.fadeIn01}>
                       <a
-                        className=" d-block w-100 d-flex pb-2 jay-hot-list-cate-channel-btn pt-1 mt-3"
+                        className=" d-block w-100 jay-hot-list-cate-channel-btn pt-3 pb-2 mh14 px-3"
                         href="javascript"
                         onClick={(event) => {
                           event.preventDefault();
                         }}
                       >
-                        <div className="jay-hot-list-cate-channel-rank d-flex align-items-center">
-                          <h4>{index + 1}</h4>
-                        </div>
-                        <div className="jay-hot-list-cate-channel-pic mx-3">
-                          <img src={item.podcaster_img} alt="" />
-                        </div>
-                        <div className="jay-hot-list-cate-channel-info">
-                          <h6>{item.channel_title}</h6>
-                          <span>評分：{item.channel_rating}</span>
+                        <div className="jay-border-line d-flex pb-2">
+                          <div className="jay-hot-list-cate-channel-rank d-flex align-items-center">
+                            <h4>{index + 1}</h4>
+                          </div>
+                          <div className="jay-hot-list-cate-channel-pic mx-3">
+                            <img src={item.podcaster_img} alt="" />
+                          </div>
+                          <div className="jay-hot-list-cate-channel-info">
+                            <h6>{item.channel_title}</h6>
+                            <span>評分：{item.channel_rating}</span>
+                          </div>
                         </div>
                       </a>
                     </div>
