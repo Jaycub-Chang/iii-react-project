@@ -75,4 +75,14 @@ router.get('/popular_channels', async (req, res) => {
 });
 
 
+// 取得類別頻道
+router.get('/cate_popular_channels/:cate', async (req, res) => {
+
+    const sql = "SELECT * FROM `podcast_channel_info` WHERE `channel_catagory`=? ORDER BY `podcast_channel_info`.`channel_rating` DESC";
+    const [results] = await db.query(sql, [req.params.cate]);
+
+    res.send(results);
+});
+
+
 module.exports = router;

@@ -3,10 +3,12 @@ import { combineReducers } from 'redux';
 import podcasterDashboardInfoState from './podcasterDashboardInfoState';
 import podcasterAudioListState from './podcasterAudioListState';
 import explorePopularChannel from './explorePopularChannel';
+import exploreCateChannel from './exploreCateChannel';
 
 // 合併所有的reducers成一個大的reducer
 export const rootReducer = combineReducers({
   podcasterDashboardInfoState,
   podcasterAudioListState,
   explorePopularChannel,
+  exploreCateChannel,
 });

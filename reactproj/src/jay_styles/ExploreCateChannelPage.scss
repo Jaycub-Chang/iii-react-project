@@ -1,5 +1,3 @@
-@import '~bootstrap/scss/bootstrap.scss';
-
 .explorePageBody{
     background-color: #232D2F;
 }
@@ -11,4 +9,77 @@
 .jay-not-now-page{
     color:#F8F8F8;
     opacity: 60%;
+}
+
+.jay-hot-list-toggle-area a,
+.jay-hot-list-toggle-area a:hover,
+.cate-all-channel a,
+.cate-all-channel a:hover{
+    color: #F8F8F8;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.jay-hot-list-toggle-area p{
+    margin: 0;
+}
+
+.jay-hot-list-toggle-btn{
+    background-color: rgba($color: #F8F8F8, $alpha: 0.1);
+    border-radius: 5px 5px 0px 0px;
+    border-right:  1px solid #232D2F;
+    border-bottom:  1px solid #232D2F;
+}
+
+.jay-hot-list-cate-channel{
+    background-color: rgba($color: #F8F8F8, $alpha: 0.1);
+}
+.jay-hot-list-cate-channel-rank{
+    max-width: 10%;
+    color:  #F8F8F8;
+    font-weight: bold;
+}
+.jay-hot-list-cate-channel-pic{
+    max-width: 40%;
+    width: 4rem;
+    height: 4rem;
+    overflow: hidden;
+    border-radius: 5px;
+}
+.jay-hot-list-cate-channel-info{
+    max-width: 50%;
+}
+.jay-hot-list-cate-channel-info h6{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.cate-all-channel-pic{
+    width: 9rem;
+    height: 9rem;
+    overflow: hidden;
+}
+
+.jay-hot-list-cate-channel-pic img,
+.cate-all-channel-pic img{
+    width: 100%;
+    object-fit: cover;
+}
+
+.jay-hot-list-cate-channel-btn{
+    border-bottom:  1px solid rgba($color: #F8F8F8, $alpha: 0.8);
+    color: #F8F8F8;
+}
+.jay-hot-list-cate-channel-btn:hover{
+    text-decoration: none;
+    color: #F8F8F8;
+}
+
+hr.jay-cate-hr{
+    border: solid 1px rgba($color: #F8F8F8, $alpha: 0.2);
+}
+
+.cate-all-channel,
+.cate-head-term{
+    color: #F8F8F8;
 }

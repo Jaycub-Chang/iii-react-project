@@ -89,11 +89,6 @@ const mapStateToProps = (store) => {
   return { channel_data: store.podcasterDashboardInfoState };
 };
 
-// 原本的mapDispatchToProps
-// const mapDispatchToProps = (dispatch) =>{
-//   return { addValue, minusValue }
-// }
-
 // 綁定部份action creators
 // 注意：第二個傳入參數` { addValue, minusValue, addValueAsync }`是個物件值
 export default withRouter(

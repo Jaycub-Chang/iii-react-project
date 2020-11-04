@@ -2,6 +2,7 @@ import {
   INIT_PODCASTER_DASHBOARD,
   INIT_PODCASTER_AUDIO_LIST,
   INIT_EXPLORE_HOMEPAGE,
+  INIT_EXPLORE_CATEPAGE,
 } from './actionTypes';
 
 export const initalDashboard = (payload) => {
@@ -118,5 +119,27 @@ export const initalExploreHomePageAsync = () => {
     const response = await fetch(request);
     const data = await response.json();
     dispatch(initalExploreHomePage(data));
+  };
+};
+
+//初始化類別頁面
+export const initalExploreCatePage = (payload) => {
+  return { type: INIT_EXPLORE_CATEPAGE, payload: payload };
+};
+
+export const initalExploreCatePageAsync = (cate_term) => {
+  return async function getExploreCatePageData(dispatch) {
+    const url = `http://localhost:5566/explore/cate_popular_channels/${cate_term}`;
+    const request = new Request(url, {
+      method: 'GET',
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    });
+
+    const response = await fetch(request);
+    const data = await response.json();
+    dispatch(initalExploreCatePage(data));
   };
 };

@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { initalExploreHomePageAsync } from '../jay_actions/index';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 //components
 import { fadeInUp, fadeIn } from 'react-animations';
@@ -93,6 +93,7 @@ function ExploreHomePage(props) {
                 href="javascript"
                 onClick={(event) => {
                   event.preventDefault();
+                  props.history.push('/explore/category/news');
                 }}
               >
                 <img
@@ -113,6 +114,7 @@ function ExploreHomePage(props) {
                 href="javascript"
                 onClick={(event) => {
                   event.preventDefault();
+                  props.history.push('/explore/category/technology');
                 }}
               >
                 <img
@@ -133,6 +135,7 @@ function ExploreHomePage(props) {
                 href="javascript"
                 onClick={(event) => {
                   event.preventDefault();
+                  props.history.push('/explore/category/sports');
                 }}
               >
                 <img
@@ -173,6 +176,7 @@ function ExploreHomePage(props) {
                 href="javascript"
                 onClick={(event) => {
                   event.preventDefault();
+                  props.history.push('/explore/category/society');
                 }}
               >
                 <img
@@ -193,6 +197,7 @@ function ExploreHomePage(props) {
                 href="javascript"
                 onClick={(event) => {
                   event.preventDefault();
+                  props.history.push('/explore/category/business');
                 }}
               >
                 <img
@@ -213,6 +218,7 @@ function ExploreHomePage(props) {
                 href="javascript"
                 onClick={(event) => {
                   event.preventDefault();
+                  props.history.push('/explore/category/education');
                 }}
               >
                 <img
@@ -233,6 +239,7 @@ function ExploreHomePage(props) {
                 href="javascript"
                 onClick={(event) => {
                   event.preventDefault();
+                  props.history.push('/explore/category/health');
                 }}
               >
                 <img
@@ -252,12 +259,13 @@ function ExploreHomePage(props) {
           <div className="row d-flex">
             {props.popular_channel.map((item, index) => {
               if (index >= 5) {
-                return <></>;
+                return null;
               }
               return (
                 <div
                   className="col-12 col-lg d-flex position-relative jay-channel-rating-section1"
                   style={styles.fadeIn01}
+                  key={index}
                 >
                   <div className="jay-channel-rating-number">
                     <img
@@ -284,37 +292,39 @@ function ExploreHomePage(props) {
           <div className="row d-flex">
             {props.popular_channel.map((item, index) => {
               if (index < 5) {
-                return <></>;
+                return null;
               }
               return (
-                <a
-                  href="javascript"
-                  onClick={(event) => {
-                    event.preventDefault();
-                  }}
-                  style={{
-                    display: 'block',
-                    zIndex: '100',
-                    width: '20%',
-                  }}
-                >
-                  <div className="col-6 col-lg d-flex jay-channel-rating-section2 py-3 px-3 mh14">
-                    <div className="jay-section2-part1">
-                      <div className="jay-number-circle-area position-relative">
-                        <h6 className=" position-absolute">{index + 1}</h6>
+                <div key={index}>
+                  <a
+                    href="javascript"
+                    onClick={(event) => {
+                      event.preventDefault();
+                    }}
+                    style={{
+                      display: 'block',
+                      zIndex: '100',
+                      width: '20%',
+                    }}
+                  >
+                    <div className="col-6 col-lg d-flex jay-channel-rating-section2 py-3 px-3 mh14">
+                      <div className="jay-section2-part1">
+                        <div className="jay-number-circle-area position-relative">
+                          <h6 className=" position-absolute">{index + 1}</h6>
+                        </div>
+                      </div>
+                      <div className="jay-section2-part2">
+                        <div className="jay-channel-rating-pic-part2">
+                          <img src={item.podcaster_img} alt="" />
+                        </div>
+                      </div>
+                      <div className="jay-section2-part3">
+                        <h6>{item.channel_title}</h6>
+                        <span>{item.channel_catagory}</span>
                       </div>
                     </div>
-                    <div className="jay-section2-part2">
-                      <div className="jay-channel-rating-pic-part2">
-                        <img src={item.podcaster_img} alt="" />
-                      </div>
-                    </div>
-                    <div className="jay-section2-part3">
-                      <h6>{item.channel_title}</h6>
-                      <span>{item.channel_catagory}</span>
-                    </div>
-                  </div>
-                </a>
+                  </a>
+                </div>
               );
             })}
           </div>
