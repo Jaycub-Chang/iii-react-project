@@ -151,6 +151,11 @@ function ExploreCateChannelPage(props) {
                         href="javascript"
                         onClick={(event) => {
                           event.preventDefault();
+                          props.history.push(
+                            `/channel_page/${item.channel_catagory.toLowerCase()}/${
+                              item.podcaster_id
+                            }`
+                          );
                         }}
                       >
                         <div className="jay-border-line d-flex pb-2">

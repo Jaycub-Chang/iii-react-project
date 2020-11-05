@@ -120,7 +120,7 @@ function ExploreHomePage(props) {
     }
     setTimeout(() => {
       setIsLoading(false);
-    }, 1500);
+    }, 3000);
   }
 
   useEffect(() => {
@@ -347,6 +347,11 @@ function ExploreHomePage(props) {
                       href="javascript"
                       onClick={(event) => {
                         event.preventDefault();
+                        props.history.push(
+                          `/channel_page/${item.channel_catagory.toLowerCase()}/${
+                            item.podcaster_id
+                          }`
+                        );
                       }}
                     >
                       <img src={item.podcaster_img} alt="" />
@@ -368,6 +373,11 @@ function ExploreHomePage(props) {
                   href="javascript"
                   onClick={(event) => {
                     event.preventDefault();
+                    props.history.push(
+                      `/channel_page/${item.channel_catagory.toLowerCase()}/${
+                        item.podcaster_id
+                      }`
+                    );
                   }}
                   style={{
                     display: 'block',

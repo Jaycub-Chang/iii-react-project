@@ -7,7 +7,7 @@ import {
   initalChannelPageAsync,
   initalDashboardAsync,
 } from '../jay_actions/index';
-import { withRouter, useParams, Link } from 'react-router-dom';
+import { withRouter, useParams } from 'react-router-dom';
 
 //components
 import { fadeIn } from 'react-animations';
@@ -38,6 +38,7 @@ function ChannelPage(props) {
     },
   };
 
+  const { globalAudioArry, setGlobalAudioArry } = props;
   const [isLoading, setIsLoading] = useState(false);
   const { cate_term, podcaster_id } = useParams();
   const [breadcrumbCateTerm, setBreadcrumbCateTerm] = useState('');
@@ -182,7 +183,7 @@ function ChannelPage(props) {
                     </a>
                   </div>
                   <div className="pt-2">
-                    <a href={item.owner_email}>
+                    <a href={'mailto:' + item.owner_email}>
                       <MdEmail style={{ fontSize: '1.25rem' }} />
                       <span className="px-2">聯絡我們</span>
                     </a>
@@ -216,18 +217,54 @@ function ChannelPage(props) {
                     <div
                       className="channel-audio-list-icon position-absolute"
                       style={{ left: '70%' }}
+                      onMouseEnter={(event) => {
+                        event.target
+                          .closest('.channel-page-audio-list')
+                          .querySelector('.mh14')
+                          .classList.add('mh15');
+                      }}
+                      onMouseLeave={(event) => {
+                        event.target
+                          .closest('.channel-page-audio-list')
+                          .querySelector('.mh14')
+                          .classList.remove('mh15');
+                      }}
                     >
                       <AiFillPlayCircle style={{ fontSize: '2.5rem' }} />
                     </div>
                     <div
                       className="channel-audio-list-icon position-absolute"
                       style={{ left: '80%' }}
+                      onMouseEnter={(event) => {
+                        event.target
+                          .closest('.channel-page-audio-list')
+                          .querySelector('.mh14')
+                          .classList.add('mh15');
+                      }}
+                      onMouseLeave={(event) => {
+                        event.target
+                          .closest('.channel-page-audio-list')
+                          .querySelector('.mh14')
+                          .classList.remove('mh15');
+                      }}
                     >
                       <RiPlayListAddLine style={{ fontSize: '2rem' }} />
                     </div>
                     <div
                       className="channel-audio-list-icon position-absolute"
                       style={{ left: '90%' }}
+                      onMouseEnter={(event) => {
+                        event.target
+                          .closest('.channel-page-audio-list')
+                          .querySelector('.mh14')
+                          .classList.add('mh15');
+                      }}
+                      onMouseLeave={(event) => {
+                        event.target
+                          .closest('.channel-page-audio-list')
+                          .querySelector('.mh14')
+                          .classList.remove('mh15');
+                      }}
                     >
                       <FaHeart style={{ fontSize: '2rem' }} />
                     </div>

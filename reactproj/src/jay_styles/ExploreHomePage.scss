@@ -168,7 +168,33 @@
 .mh14:hover:before, .mh14:hover::after{
     transform: translate(0,0);  
 }
-
+//mantain
+.mh15 {
+    color: rgba(255,255,255,0.1);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+    
+.mh15:before, .mh15:after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -1px;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color:rgba(255,255,255,0.1);
+    transition: all 0.3s;
+    transform: translate(-100%,0);
+    transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+}
+.mh15:after{
+    transition-delay: 0.2s;
+}
+.mh15:before, .mh15:after{
+    transform: translate(0,0);  
+}
 .jay-rank-6-10-btn:hover{
     text-decoration: none;
 }
