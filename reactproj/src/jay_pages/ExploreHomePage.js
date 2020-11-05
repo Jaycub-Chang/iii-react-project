@@ -85,7 +85,6 @@ function ExploreHomePage(props) {
     for (let i = 0; i < imgUrlArray.length + 8; i++) {
       tempImgUrlArray[i] = new Image();
       tempImgUrlArray[i].src = imgUrlArray[i];
-      console.log(tempImgUrlArray);
     }
     setTimeout(() => {
       setIsLoading(false);
@@ -191,6 +190,7 @@ function ExploreHomePage(props) {
                 href="javascript"
                 onClick={(event) => {
                   event.preventDefault();
+                  props.history.push('/explore/category/entertainment');
                 }}
               >
                 <img
@@ -199,7 +199,7 @@ function ExploreHomePage(props) {
                 />
                 <div className="position-absolute jay-cate-icon-layer">
                   <GiPartyFlags />
-                  <h3 className=" text-center mt-1">活動</h3>
+                  <h3 className=" text-center mt-1">娛樂</h3>
                 </div>
               </a>
             </div>

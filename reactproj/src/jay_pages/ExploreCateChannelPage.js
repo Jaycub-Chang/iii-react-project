@@ -53,6 +53,9 @@ function ExploreCateChannelPage(props) {
       case 'business':
         setBreadcrumbCateTerm('商業');
         break;
+      case 'entertainment':
+        setBreadcrumbCateTerm('娛樂');
+        break;
       default:
         setBreadcrumbCateTerm('無此');
     }
@@ -97,6 +100,9 @@ function ExploreCateChannelPage(props) {
               <li
                 className="breadcrumb-item jay-not-now-page"
                 aria-current="page"
+                onClick={() => {
+                  props.history.push('/explore_home_page');
+                }}
               >
                 <RiMusic2Fill style={{ fontSize: '1.5rem' }} className="mx-1" />
                 探索
@@ -181,6 +187,9 @@ function ExploreCateChannelPage(props) {
                         href="javascript"
                         onClick={(event) => {
                           event.preventDefault();
+                          props.history.push(
+                            `/channel_page/${cate_term}/${item.podcaster_id}`
+                          );
                         }}
                       >
                         <div className="cate-all-channel-pic">

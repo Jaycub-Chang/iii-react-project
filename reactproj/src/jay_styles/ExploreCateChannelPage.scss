@@ -6,9 +6,14 @@
     color:#F8F8F8;
 }
 
-.jay-not-now-page{
+.jay-not-now-page,
+.jay-not-now-page:hover{
     color:#F8F8F8;
     opacity: 60%;
+}
+.jay-not-now-page:hover{
+    cursor: pointer;
+    opacity: 80%;
 }
 
 .jay-hot-list-toggle-area a,
