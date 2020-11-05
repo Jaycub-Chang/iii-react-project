@@ -1,19 +1,30 @@
-import './../jay_styles/ExploreCateChannelPage.scss';
+import './../jay_styles/ChannelPage.scss';
 import 'animate.css/animate.min.css';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
-import { initalExploreCatePageAsync } from '../jay_actions/index';
-import { withRouter, useParams } from 'react-router-dom';
+import {
+  initalChannelPageAsync,
+  initalDashboardAsync,
+} from '../jay_actions/index';
+import { withRouter, useParams, Link } from 'react-router-dom';
 
 //components
 import { fadeIn } from 'react-animations';
 import Radium, { StyleRoot } from 'radium';
 import ScaleLoader from 'react-spinners/ScaleLoader';
 import { css } from '@emotion/core';
+import ScrollToTop from 'react-scroll-to-top';
 
 // react icon
-import { RiMusic2Fill } from 'react-icons/ri';
+import { RiMusic2Fill, RiPlayListAddLine } from 'react-icons/ri';
+import { FaRss, FaHeart } from 'react-icons/fa';
+import { MdEmail } from 'react-icons/md';
+import { AiFillPlayCircle, AiOutlineToTop } from 'react-icons/ai';
+
+//ant design
+import 'antd/dist/antd.css';
+import { Rate } from 'antd';
 
 function ChannelPage(props) {
   const styles = {
@@ -28,7 +39,7 @@ function ChannelPage(props) {
   };
 
   const [isLoading, setIsLoading] = useState(false);
-  const { cate_term } = useParams();
+  const { cate_term, podcaster_id } = useParams();
   const [breadcrumbCateTerm, setBreadcrumbCateTerm] = useState('');
   const transTermToChinese = () => {
     switch (cate_term) {
@@ -61,38 +72,30 @@ function ChannelPage(props) {
     }
   };
 
-  const imgUrlArray = [];
-
-  function preLoadImgs() {
-    props.cate_channels.forEach((item) => {
-      imgUrlArray.push(item.podcaster_img);
-    });
-    let tempImgUrlArray = [];
-    for (let i = 0; i < imgUrlArray.length; i++) {
-      tempImgUrlArray[i] = new Image();
-      tempImgUrlArray[i].src = imgUrlArray[i];
-      // console.log(tempImgUrlArray);
-    }
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 500);
+  function truncate(str, n) {
+    return str.length > n ? str.substr(0, n - 1) + '......' : str;
   }
 
   useEffect(() => {
-    //   setIsLoading(true);
+    setIsLoading(true);
     async function initialGetData() {
       transTermToChinese();
-      // await props.initalExploreCatePageAsync(cate_term);
+      await props.initalDashboardAsync(podcaster_id);
+      await props.initalChannelPageAsync(podcaster_id);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 3000);
     }
     initialGetData();
   }, []);
 
-  //   useEffect(() => {
-  //     preLoadImgs();
-  //   }, [props.cate_channels]);
-
   const displayCatePage = (
     <StyleRoot>
+      <ScrollToTop
+        smooth
+        style={{ bottom: '120px', right: '80px' }}
+        component={<AiOutlineToTop style={{ fontSize: '1.8rem' }} />}
+      />
       <div className="explorePageBody pt-4" style={{ paddingBottom: '100px' }}>
         <div className="container">
           <nav aria-label="breadcrumb">
@@ -117,13 +120,121 @@ function ChannelPage(props) {
                 {breadcrumbCateTerm}類
               </li>
               <li className="breadcrumb-item jay-now-page" aria-current="page">
-                台灣通勤第一品牌
+                報導者
               </li>
             </ol>
           </nav>
           <div className="row mt-4">
-            <div className="col-3"></div>
-            <div className="col-9"></div>
+            {props.channel_data.map((item, index) => {
+              return (
+                <div
+                  className="col-3 jay-side-bar"
+                  key={index}
+                  style={styles.fadeIn01}
+                >
+                  <div className="jay-channel-head-pic-area">
+                    <img src={item.podcaster_img} alt="" />
+                  </div>
+                  <h3 className="pt-3" style={{ lineHeight: '1.5' }}>
+                    {item.channel_title}
+                  </h3>
+                  <div>
+                    <span>{breadcrumbCateTerm}</span>
+                  </div>
+                  <div>
+                    <button
+                      type="button"
+                      className=" btn btn-sm btn-info my-3 mr-3"
+                    >
+                      訂閱
+                    </button>
+                    <button
+                      type="button"
+                      className=" btn btn-sm btn-secondary my-3 mr-3"
+                    >
+                      分享
+                    </button>
+                    <button
+                      type="button"
+                      className=" btn btn-sm btn-secondary my-3"
+                    >
+                      評分
+                    </button>
+                  </div>
+                  <div className=" mb-1">
+                    <Rate
+                      style={{ filter: 'brightness(1.5)', fontSize: '1.5rem' }}
+                      allowHalf
+                      disabled
+                      defaultValue={item.channel_rating}
+                    />
+                  </div>
+                  <div>
+                    <span>
+                      網友評比： &nbsp;&nbsp;{item.channel_rating} &nbsp;/&nbsp;
+                      5
+                    </span>
+                  </div>
+                  <div className="pt-4">
+                    <a target="_blank" href={item.channel_rss_link}>
+                      <FaRss style={{ fontSize: '1.25rem' }} />{' '}
+                      <span className="px-2">RSS訂閱</span>
+                    </a>
+                  </div>
+                  <div className="pt-2">
+                    <a href={item.owner_email}>
+                      <MdEmail style={{ fontSize: '1.25rem' }} />
+                      <span className="px-2">聯絡我們</span>
+                    </a>
+                  </div>
+                </div>
+              );
+            })}
+            <div className="col-9 jay-main-bar" style={styles.fadeIn02}>
+              {props.channel_data.map((item, index) => {
+                return (
+                  <div key={index}>
+                    <h5>頻道介紹</h5>
+                    <p>{item.podcaster_description}</p>
+                  </div>
+                );
+              })}
+              <hr className="jay-cate-hr" />
+              {props.channel_audio_data.map((item, index) => {
+                return (
+                  <div
+                    className=" position-relative channel-page-audio-list"
+                    key={index}
+                  >
+                    <div className=" d-flex py-3 px-3 mb-3 mh14">
+                      <div>
+                        <h6>{item.audio_title}</h6>
+                        <p>{truncate(item.audio_content_snippet, 120)}</p>
+                        <span>{item.pubDate}</span>
+                      </div>
+                    </div>
+                    <div
+                      className="channel-audio-list-icon position-absolute"
+                      style={{ left: '70%' }}
+                    >
+                      <AiFillPlayCircle style={{ fontSize: '2.5rem' }} />
+                    </div>
+                    <div
+                      className="channel-audio-list-icon position-absolute"
+                      style={{ left: '80%' }}
+                    >
+                      <RiPlayListAddLine style={{ fontSize: '2rem' }} />
+                    </div>
+                    <div
+                      className="channel-audio-list-icon position-absolute"
+                      style={{ left: '90%' }}
+                    >
+                      <FaHeart style={{ fontSize: '2rem' }} />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
@@ -151,9 +262,14 @@ function ChannelPage(props) {
 }
 
 const mapStateToProps = (store) => {
-  return { cate_channels: store.exploreCateChannel };
+  return {
+    channel_audio_data: store.channelPageData,
+    channel_data: store.podcasterDashboardInfoState,
+  };
 };
 
 export default withRouter(
-  connect(mapStateToProps, { initalExploreCatePageAsync })(ChannelPage)
+  connect(mapStateToProps, { initalChannelPageAsync, initalDashboardAsync })(
+    ChannelPage
+  )
 );

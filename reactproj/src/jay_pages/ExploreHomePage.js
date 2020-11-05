@@ -66,6 +66,38 @@ function ExploreHomePage(props) {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const transTermToChinese = (cate_term) => {
+    let tempCateTerm = cate_term.toLowerCase();
+    switch (tempCateTerm) {
+      case 'news':
+        return '新聞';
+        break;
+      case 'society':
+        return '故事';
+        break;
+      case 'education':
+        return '教育';
+        break;
+      case 'health':
+        return '健康';
+        break;
+      case 'sports':
+        return '運動';
+        break;
+      case 'technology':
+        return '科技';
+        break;
+      case 'business':
+        return '商業';
+        break;
+      case 'entertainment':
+        return '娛樂';
+        break;
+      default:
+        return '無此';
+    }
+  };
+
   const imgUrlArray = [
     'http://localhost:3000/images/explore_categories/pexels-sahidin-sahidin-2695975.jpg',
     'http://localhost:3000/images/explore_categories/board-22098_1920.jpg',
@@ -88,7 +120,7 @@ function ExploreHomePage(props) {
     }
     setTimeout(() => {
       setIsLoading(false);
-    }, 500);
+    }, 1500);
   }
 
   useEffect(() => {
@@ -356,7 +388,7 @@ function ExploreHomePage(props) {
                     </div>
                     <div className="jay-section2-part3">
                       <h6>{item.channel_title}</h6>
-                      <span>{item.channel_catagory}</span>
+                      <span>{transTermToChinese(item.channel_catagory)}</span>
                     </div>
                   </div>
                 </a>

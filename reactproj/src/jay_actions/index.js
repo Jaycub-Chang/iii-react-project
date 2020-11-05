@@ -3,6 +3,7 @@ import {
   INIT_PODCASTER_AUDIO_LIST,
   INIT_EXPLORE_HOMEPAGE,
   INIT_EXPLORE_CATEPAGE,
+  INIT_CHANNEL_PAGE_DATA,
 } from './actionTypes';
 
 export const initalDashboard = (payload) => {
@@ -141,5 +142,27 @@ export const initalExploreCatePageAsync = (cate_term) => {
     const response = await fetch(request);
     const data = await response.json();
     dispatch(initalExploreCatePage(data));
+  };
+};
+
+//初始化頻道頁面
+export const initalChannelPage = (payload) => {
+  return { type: INIT_CHANNEL_PAGE_DATA, payload: payload };
+};
+
+export const initalChannelPageAsync = (podcaster_id) => {
+  return async function getChannelPageData(dispatch) {
+    const url = `http://localhost:5566/explore/channel_page_data/${podcaster_id}`;
+    const request = new Request(url, {
+      method: 'GET',
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    });
+
+    const response = await fetch(request);
+    const data = await response.json();
+    dispatch(initalChannelPage(data));
   };
 };

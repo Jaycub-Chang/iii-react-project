@@ -15,73 +15,79 @@ function PodcasterDashboardHome(props) {
   }, []);
 
   return (
-    <div className="container">
-      <div className="row justify-content-center">
-        <div className="jay-podcastImgArea my-3">
-          <img src={props.channel_data.podcaster_img} alt="" />
-        </div>
-        <div className="col-12 text-center">
-          <button className="btn btn-primary btn-sm">更換封面</button>
-        </div>
-      </div>
-      <hr className="jay-dashboard-hr" />
-      <div className="row justify-content-center custom-table-width">
-        <table className="table col-10 jay-table">
-          <tbody>
-            <tr>
-              <th scope="row">頻道編號</th>
-              <td>{props.channel_data.podcaster_id}</td>
-              <td>
-                <a href="#">編輯</a>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">頻道名稱</th>
-              <td>{props.channel_data.channel_title}</td>
-              <td>
-                <a href="#">編輯</a>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">簡介</th>
-              <td>{props.channel_data.channel_summary}</td>
-              <td>
-                <a href="#">編輯</a>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">詳細內容</th>
-              <td>{props.channel_data.podcaster_description}</td>
-              <td>
-                <a href="#">編輯</a>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">頻道類別</th>
-              <td>{props.channel_data.channel_catagory}</td>
-              <td>
-                <a href="#">編輯</a>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">RSS連結</th>
+    <>
+      {props.channel_data.map((item) => {
+        return (
+          <div className="container">
+            <div className="row justify-content-center">
+              <div className="jay-podcastImgArea my-3">
+                <img src={item.podcaster_img} alt="" />
+              </div>
+              <div className="col-12 text-center">
+                <button className="btn btn-primary btn-sm">更換封面</button>
+              </div>
+            </div>
+            <hr className="jay-dashboard-hr" />
+            <div className="row justify-content-center custom-table-width">
+              <table className="table col-10 jay-table">
+                <tbody>
+                  <tr>
+                    <th scope="row">頻道編號</th>
+                    <td>{item.podcaster_id}</td>
+                    <td>
+                      <a href="#">編輯</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">頻道名稱</th>
+                    <td>{item.channel_title}</td>
+                    <td>
+                      <a href="#">編輯</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">簡介</th>
+                    <td>{item.channel_summary}</td>
+                    <td>
+                      <a href="#">編輯</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">詳細內容</th>
+                    <td>{item.podcaster_description}</td>
+                    <td>
+                      <a href="#">編輯</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">頻道類別</th>
+                    <td>{item.channel_catagory}</td>
+                    <td>
+                      <a href="#">編輯</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">RSS連結</th>
 
-              <td>{props.channel_data.channel_rss_link}</td>
-              <td>
-                <a href="#">編輯</a>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">聯絡信箱</th>
-              <td>{props.channel_data.owner_email}</td>
-              <td>
-                <a href="#">編輯</a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+                    <td>{item.channel_rss_link}</td>
+                    <td>
+                      <a href="#">編輯</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">聯絡信箱</th>
+                    <td>{item.owner_email}</td>
+                    <td>
+                      <a href="#">編輯</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        );
+      })}
+    </>
   );
 }
 

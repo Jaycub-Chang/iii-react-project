@@ -75,7 +75,7 @@ function ExploreCateChannelPage(props) {
     }
     setTimeout(() => {
       setIsLoading(false);
-    }, 500);
+    }, 1000);
   }
 
   useEffect(() => {

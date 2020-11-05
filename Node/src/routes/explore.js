@@ -84,5 +84,12 @@ router.get('/cate_popular_channels/:cate', async (req, res) => {
     res.send(results);
 });
 
+// 取得單一頻道資料
+router.get('/channel_page_data/:podcaster_id', async (req, res) => {
+
+    const sql = "SELECT a.`channel_title`,a.`podcaster_img`,b.* FROM `podcast_channel_info` AS a left join `podcast_audio` AS b on a.`podcaster_id`=b.`podcaster_id` WHERE a.`podcaster_id` =? ORDER BY `sid` ASC";
+    const [results] = await db.query(sql, [req.params.podcaster_id]);
+    res.send(results);
+});
 
 module.exports = router;
