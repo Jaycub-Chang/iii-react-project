@@ -6,7 +6,14 @@ import { withRouter } from 'react-router-dom';
 
 function AudioPlayer(props) {
   // 用redux改變的store不會更新元件，所以用上層傳參數
-  const { globalAudioArry } = props;
+  const {
+    globalAudioArry,
+    setGlobalAudioArry,
+    setAudioPlayerTheme,
+    audioPlayerTheme,
+    setPlayingAudio,
+    playingAudio,
+  } = props;
   const [audioLists, setAudioLists] = useState([]);
   const [autoPlayState, setAutoPlayState] = useState(false);
 
@@ -26,6 +33,22 @@ function AudioPlayer(props) {
         quietUpdate
         clearPriorAudioLists
         audioLists={audioLists}
+        theme={audioPlayerTheme}
+        onThemeChange={(theme) => {
+          setAudioPlayerTheme(theme);
+        }}
+        onAudioListsChange={(currentPlayId, audioLists, audioInfo) => {
+          if (audioLists.length === 0) {
+            setGlobalAudioArry([]);
+            setPlayingAudio(null);
+          } else {
+            setGlobalAudioArry(audioLists);
+            setPlayingAudio(audioInfo);
+          }
+        }}
+        onAudioPlay={(audioInfo) => {
+          setPlayingAudio(audioInfo);
+        }}
       />
     </div>
   );

@@ -17,14 +17,18 @@ import { css } from '@emotion/core';
 import ScrollToTop from 'react-scroll-to-top';
 
 // react icon
-import { RiMusic2Fill, RiPlayListAddLine } from 'react-icons/ri';
+import {
+  RiMusic2Fill,
+  RiPlayListAddLine,
+  RiBroadcastLine,
+} from 'react-icons/ri';
 import { FaRss, FaHeart } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { AiFillPlayCircle, AiOutlineToTop } from 'react-icons/ai';
 
 //ant design
 import 'antd/dist/antd.css';
-import { Rate } from 'antd';
+import { Rate, Input } from 'antd';
 
 function ChannelPage(props) {
   const styles = {
@@ -38,7 +42,13 @@ function ChannelPage(props) {
     },
   };
 
-  const { globalAudioArry, setGlobalAudioArry } = props;
+  const {
+    globalAudioArry,
+    setGlobalAudioArry,
+    playingAudio,
+    setPlayingAudio,
+  } = props;
+  const { Search } = Input;
   const [isLoading, setIsLoading] = useState(false);
   const { cate_term, podcaster_id } = useParams();
   const [breadcrumbCateTerm, setBreadcrumbCateTerm] = useState('');
@@ -229,8 +239,31 @@ function ChannelPage(props) {
                           .querySelector('.mh14')
                           .classList.remove('mh15');
                       }}
+                      onClick={(event) => {
+                        let playTargetAudio = null;
+                        [playTargetAudio] = props.channel_audio_data.filter(
+                          (v) => v.sid === item.sid
+                        );
+                        let payload = {
+                          musicSrc:
+                            playTargetAudio.audio_file.indexOf('http') !== -1
+                              ? playTargetAudio.audio_file
+                              : `http://localhost:3000/audios/${playTargetAudio.audio_file}`,
+                          cover: playTargetAudio.podcaster_img,
+                          name: playTargetAudio.audio_title,
+                          singer: playTargetAudio.channel_title,
+                        };
+                        setGlobalAudioArry([payload, ...globalAudioArry]);
+                      }}
                     >
-                      <AiFillPlayCircle style={{ fontSize: '2.5rem' }} />
+                      {playingAudio &&
+                      playingAudio.name === item.audio_title ? (
+                        <AiFillPlayCircle
+                          style={{ fontSize: '2.5rem', color: '#F780AE' }}
+                        />
+                      ) : (
+                        <AiFillPlayCircle style={{ fontSize: '2.5rem' }} />
+                      )}
                     </div>
                     <div
                       className="channel-audio-list-icon position-absolute"
@@ -246,6 +279,22 @@ function ChannelPage(props) {
                           .closest('.channel-page-audio-list')
                           .querySelector('.mh14')
                           .classList.remove('mh15');
+                      }}
+                      onClick={(event) => {
+                        let playTargetAudio = null;
+                        [playTargetAudio] = props.channel_audio_data.filter(
+                          (v) => v.sid === item.sid
+                        );
+                        let payload = {
+                          musicSrc:
+                            playTargetAudio.audio_file.indexOf('http') !== -1
+                              ? playTargetAudio.audio_file
+                              : `http://localhost:3000/audios/${playTargetAudio.audio_file}`,
+                          cover: playTargetAudio.podcaster_img,
+                          name: playTargetAudio.audio_title,
+                          singer: playTargetAudio.channel_title,
+                        };
+                        setGlobalAudioArry([...globalAudioArry, payload]);
                       }}
                     >
                       <RiPlayListAddLine style={{ fontSize: '2rem' }} />
