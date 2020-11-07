@@ -7,7 +7,7 @@ import { initalExploreCatePageAsync } from '../jay_actions/index';
 import { withRouter, useParams } from 'react-router-dom';
 
 //components
-import { fadeIn } from 'react-animations';
+import { fadeIn, fadeInLeft } from 'react-animations';
 import Radium, { StyleRoot } from 'radium';
 import ScaleLoader from 'react-spinners/ScaleLoader';
 import { css } from '@emotion/core';
@@ -24,6 +24,20 @@ function ExploreCateChannelPage(props) {
     fadeIn02: {
       animation: '2.5s',
       animationName: Radium.keyframes(fadeIn, 'fadeIn'),
+    },
+    fadeIn03: {
+      opacity: '0',
+      animation: '3s',
+      animationName: Radium.keyframes(fadeIn, 'fadeIn'),
+      animationDelay: '1.8s',
+      animationFillMode: 'forwards',
+    },
+    fadeInLeft01: {
+      opacity: '0',
+      animation: '1s',
+      animationName: Radium.keyframes(fadeInLeft, 'fadeInLeft'),
+      animationDelay: '3.5s',
+      animationFillMode: 'forwards',
     },
   };
 
@@ -177,6 +191,57 @@ function ExploreCateChannelPage(props) {
               </div>
             </div>
             <div className="col-9">
+              <div className=" d-flex">
+                <div className="jay-svg-area col-6 position-relative">
+                  <div className="jay-svg-img-area position-absolute">
+                    <img
+                      src="https://static.mytuner.mobi/media/podcasts/676/tai-wan-tong-qin-di-pin-pai.jpg"
+                      alt=""
+                    />
+                  </div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="heart-loader"
+                    viewBox="0 0 100 100"
+                  >
+                    <g className="heart-loader__group">
+                      <path
+                        fill="none"
+                        strokeWidth="1"
+                        d="M15 58v35h35V58z"
+                        className="heart-loader__square"
+                      ></path>
+                    </g>
+                  </svg>
+                </div>
+                <div style={{ overflow: 'hidden' }}>
+                  <h4 style={styles.fadeIn03} className="jay-ani-channel-title">
+                    TOP 1. &nbsp;&nbsp; 台灣通勤第一品牌
+                  </h4>
+                  <p style={styles.fadeInLeft01} className="pt-3">
+                    在這裏，Kylie跟Ken
+                    用雙語的對話包裝知識，用輕鬆的口吻胡說八道。
+                    我們閒聊也談正經事，讓生硬的國際大事變得鬆軟好入口；
+                    歡迎你加入這外表看似嘴砲，內容卻異於常人的有料聊天。
+                    台灣的Podcast 我們的Podcast Facebook搜尋：國際狗語日報
+                    Instagram搜尋：百靈果News
+                  </p>
+                  <button
+                    type="button"
+                    className=" btn btn-sm btn-info my-3 mr-3"
+                    style={styles.fadeInLeft01}
+                  >
+                    訂閱
+                  </button>
+                  <button
+                    type="button"
+                    className=" btn btn-sm btn-secondary my-3 mr-3"
+                    style={styles.fadeInLeft01}
+                  >
+                    前往
+                  </button>
+                </div>
+              </div>
               <hr className="jay-cate-hr" />
               <h4 className="cate-head-term py-3 px-5">{breadcrumbCateTerm}</h4>
               <div className="d-flex flex-wrap">
