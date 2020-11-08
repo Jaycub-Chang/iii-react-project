@@ -139,7 +139,17 @@ function PodcasterAudioList(props) {
                                 name: editTargetData.audio_title,
                                 singer: editTargetData.channel_title,
                               };
-                              setGlobalAudioArry([payload, ...globalAudioArry]);
+                              if (
+                                globalAudioArry[0] &&
+                                globalAudioArry[0].name === payload.name
+                              ) {
+                                return null;
+                              } else {
+                                setGlobalAudioArry([
+                                  payload,
+                                  ...globalAudioArry,
+                                ]);
+                              }
                             }}
                           >
                             <AiFillPlayCircle />

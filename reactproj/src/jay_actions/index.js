@@ -28,6 +28,22 @@ export const initalDashboardAsync = (podcaster_id) => {
   };
 };
 
+// 修改頻道
+export const editChannelAsync = (formData) => {
+  return async function editChannelSubmit(dispatch) {
+    const url = `http://localhost:5566/podcaster_dashboard/channel_info/edit/api`;
+    const request = new Request(url, {
+      method: 'POST',
+      body: formData,
+    });
+
+    const response = await fetch(request);
+    const data = await response.json();
+    // data會是一個物件值
+    console.log(response);
+  };
+};
+
 export const initalAudioList = (payload) => {
   return { type: INIT_PODCASTER_AUDIO_LIST, payload: payload };
 };

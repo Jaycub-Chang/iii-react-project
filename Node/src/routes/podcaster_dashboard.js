@@ -6,6 +6,7 @@ const fs = require('fs');
 const multer = require('multer');
 const getPostData = multer();
 const uploadAudio = require('./../jay_modules/upload_audio_module');
+const upload_audio_img = require('./../jay_modules/upload_audio_img');
 
 const { v4: uuidv4 } = require('uuid');
 const db = require(__dirname + '/../db_connect');
@@ -26,6 +27,17 @@ router.get('/channel_info/api/:podcaster_id?', async (req, res) => {
 
     const sql = "SELECT * FROM `podcast_channel_info` WHERE podcaster_id=?";
     const [results] = await db.query(sql, [req.params.podcaster_id]);    //要以陣列送進去
+
+    res.send(results);
+});
+
+// 修改頻道資料
+router.post('/channel_info/edit/api', upload_audio_img.single('image_file'), async (req, res) => {
+
+    const sql = "UPDATE `podcast_channel_info` SET `podcaster_img`=?,`channel_title`=?,`podcaster_description`=?,`channel_catagory`=?,`owner_email`=?,`channel_summary`=?,`channel_subtitle`=?,`channel_rss_link`=? WHERE `podcaster_id`=?";
+    const { podcaster_img, podcaster_id, channel_title, podcaster_description, channel_catagory, owner_email, channel_summary, channel_subtitle, channel_rss_link } = { ...req.body };
+    const new_podcaster_img = (req.file) ? req.file.filename : podcaster_img;
+    const [results] = await db.query(sql, [new_podcaster_img, channel_title, podcaster_description, channel_catagory, owner_email, channel_summary, channel_subtitle, channel_rss_link, podcaster_id]);    //要以陣列送進去
 
     res.send(results);
 });
@@ -68,10 +80,10 @@ router.post('/channel_audio/edit/api/', uploadAudio.single('audio_file'), async 
         const sql = "UPDATE `podcast_audio` SET `audio_file`=?,`audio_title`=?,`audio_content`=?,`audio_content_snippet`=? WHERE `sid`=?";
         const { audio_file, audio_title, audio_content, audio_content_snippet, sid } = { ...req.body };
         const [results] = await db.query(sql, [req.file.filename, audio_title, audio_content, audio_content_snippet, sid]);
-    }else{
+    } else {
         const sql = "UPDATE `podcast_audio` SET `audio_title`=?,`audio_content`=?,`audio_content_snippet`=? WHERE `sid`=?";
         const { audio_file, audio_title, audio_content, audio_content_snippet, sid } = { ...req.body };
-        const [results] = await db.query(sql, [ audio_title, audio_content, audio_content_snippet, sid]);
+        const [results] = await db.query(sql, [audio_title, audio_content, audio_content_snippet, sid]);
     };
 
 
