@@ -11,9 +11,11 @@ import { fadeIn, fadeInLeft } from 'react-animations';
 import Radium, { StyleRoot } from 'radium';
 import ScaleLoader from 'react-spinners/ScaleLoader';
 import { css } from '@emotion/core';
+import ScrollToTop from 'react-scroll-to-top';
 
 // react icon
 import { RiMusic2Fill } from 'react-icons/ri';
+import { AiOutlineToTop } from 'react-icons/ai';
 
 function ExploreCateChannelPage(props) {
   const styles = {
@@ -29,14 +31,14 @@ function ExploreCateChannelPage(props) {
       opacity: '0',
       animation: '3s',
       animationName: Radium.keyframes(fadeIn, 'fadeIn'),
-      animationDelay: '1.8s',
+      animationDelay: '1.6s',
       animationFillMode: 'forwards',
     },
     fadeInLeft01: {
       opacity: '0',
       animation: '1s',
       animationName: Radium.keyframes(fadeInLeft, 'fadeInLeft'),
-      animationDelay: '3.5s',
+      animationDelay: '3s',
       animationFillMode: 'forwards',
     },
   };
@@ -44,6 +46,7 @@ function ExploreCateChannelPage(props) {
   const [isLoading, setIsLoading] = useState(false);
   const { cate_term } = useParams();
   const [breadcrumbCateTerm, setBreadcrumbCateTerm] = useState('');
+  const [hoverChannel, setHoverChannel] = useState(0);
   const transTermToChinese = () => {
     switch (cate_term) {
       case 'news':
@@ -92,6 +95,10 @@ function ExploreCateChannelPage(props) {
     }, 1000);
   }
 
+  function truncate(str, n) {
+    return str.length > n ? str.substr(0, n - 1) + '......' : str;
+  }
+
   useEffect(() => {
     setIsLoading(true);
     async function initialGetData() {
@@ -107,6 +114,11 @@ function ExploreCateChannelPage(props) {
 
   const displayCatePage = (
     <StyleRoot>
+      <ScrollToTop
+        smooth
+        style={{ bottom: '120px', right: '80px' }}
+        component={<AiOutlineToTop style={{ fontSize: '1.8rem' }} />}
+      />
       <div className="explorePageBody pt-4" style={{ paddingBottom: '100px' }}>
         <div className="container">
           <nav aria-label="breadcrumb">
@@ -171,6 +183,9 @@ function ExploreCateChannelPage(props) {
                             }`
                           );
                         }}
+                        onMouseEnter={() => {
+                          setHoverChannel(index);
+                        }}
                       >
                         <div className="jay-border-line d-flex pb-2">
                           <div className="jay-hot-list-cate-channel-rank d-flex align-items-center">
@@ -191,57 +206,75 @@ function ExploreCateChannelPage(props) {
               </div>
             </div>
             <div className="col-9">
-              <div className=" d-flex">
-                <div className="jay-svg-area col-6 position-relative">
-                  <div className="jay-svg-img-area position-absolute">
-                    <img
-                      src="https://static.mytuner.mobi/media/podcasts/676/tai-wan-tong-qin-di-pin-pai.jpg"
-                      alt=""
-                    />
-                  </div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="heart-loader"
-                    viewBox="0 0 100 100"
-                  >
-                    <g className="heart-loader__group">
-                      <path
-                        fill="none"
-                        strokeWidth="1"
-                        d="M15 58v35h35V58z"
-                        className="heart-loader__square"
-                      ></path>
-                    </g>
-                  </svg>
-                </div>
-                <div style={{ overflow: 'hidden' }}>
-                  <h4 style={styles.fadeIn03} className="jay-ani-channel-title">
-                    TOP 1. &nbsp;&nbsp; 台灣通勤第一品牌
-                  </h4>
-                  <p style={styles.fadeInLeft01} className="pt-3">
-                    在這裏，Kylie跟Ken
-                    用雙語的對話包裝知識，用輕鬆的口吻胡說八道。
-                    我們閒聊也談正經事，讓生硬的國際大事變得鬆軟好入口；
-                    歡迎你加入這外表看似嘴砲，內容卻異於常人的有料聊天。
-                    台灣的Podcast 我們的Podcast Facebook搜尋：國際狗語日報
-                    Instagram搜尋：百靈果News
-                  </p>
-                  <button
-                    type="button"
-                    className=" btn btn-sm btn-info my-3 mr-3"
-                    style={styles.fadeInLeft01}
-                  >
-                    訂閱
-                  </button>
-                  <button
-                    type="button"
-                    className=" btn btn-sm btn-secondary my-3 mr-3"
-                    style={styles.fadeInLeft01}
-                  >
-                    前往
-                  </button>
-                </div>
-              </div>
+              {props.cate_channels.map((item, index) => {
+                if (index === hoverChannel) {
+                  return (
+                    <div className=" d-flex">
+                      <div className="jay-svg-area col-6 position-relative">
+                        <div className="jay-svg-img-area position-absolute">
+                          <img
+                            src={item.podcaster_img}
+                            alt=""
+                            onClick={() => {
+                              props.history.push(
+                                `/channel_page/${item.channel_catagory.toLowerCase()}/${
+                                  item.podcaster_id
+                                }`
+                              );
+                            }}
+                          />
+                        </div>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="heart-loader"
+                          viewBox="0 0 100 100"
+                        >
+                          <g className="heart-loader__group">
+                            <path
+                              fill="none"
+                              strokeWidth="1.8"
+                              d="M13 56v39h40V56z"
+                              className="heart-loader__square"
+                            ></path>
+                          </g>
+                        </svg>
+                      </div>
+                      <div style={{ overflow: 'hidden' }}>
+                        <h4
+                          style={styles.fadeIn03}
+                          className="jay-ani-channel-title"
+                        >
+                          TOP {index + 1}. &nbsp;&nbsp; {item.channel_title}
+                        </h4>
+                        <p style={styles.fadeInLeft01} className="pt-3">
+                          {truncate(item.podcaster_description, 150)}
+                        </p>
+                        <button
+                          type="button"
+                          className=" btn btn-sm btn-info my-3 mr-3"
+                          style={styles.fadeInLeft01}
+                        >
+                          訂閱
+                        </button>
+                        <button
+                          type="button"
+                          className=" btn btn-sm btn-secondary my-3 mr-3"
+                          style={styles.fadeInLeft01}
+                          onClick={() => {
+                            props.history.push(
+                              `/channel_page/${item.channel_catagory.toLowerCase()}/${
+                                item.podcaster_id
+                              }`
+                            );
+                          }}
+                        >
+                          前往
+                        </button>
+                      </div>
+                    </div>
+                  );
+                }
+              })}
               <hr className="jay-cate-hr" />
               <h4 className="cate-head-term py-3 px-5">{breadcrumbCateTerm}</h4>
               <div className="d-flex flex-wrap">

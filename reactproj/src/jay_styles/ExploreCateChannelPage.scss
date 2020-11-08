@@ -103,9 +103,9 @@ hr.jay-cate-hr{
 $strokeColor: #B8B8B8;
 $heartColor: #E21737;
 $size: 500px; // change this to manipulate overall size
-$totalAnim: 7s;
+$totalAnim: 6s;
 $delay: 0.5s;
-$squareLen: 150;
+$squareLen: 180;
 $svgSize: 90px;
 $circleW: 60px;
 
@@ -124,7 +124,7 @@ $circleW: 60px;
 .jay-svg-img-area img{
     width: 100%;
     object-fit: cover;
-    
+    cursor: pointer;
 }
 
 .heart-loader__square {

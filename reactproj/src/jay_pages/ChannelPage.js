@@ -253,7 +253,14 @@ function ChannelPage(props) {
                           name: playTargetAudio.audio_title,
                           singer: playTargetAudio.channel_title,
                         };
-                        setGlobalAudioArry([payload, ...globalAudioArry]);
+                        if (
+                          globalAudioArry[0] &&
+                          globalAudioArry[0].name === payload.name
+                        ) {
+                          return null;
+                        } else {
+                          setGlobalAudioArry([payload, ...globalAudioArry]);
+                        }
                       }}
                     >
                       {playingAudio &&
