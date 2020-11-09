@@ -3,12 +3,46 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { initalDashboardAsync, editChannelAsync } from '../jay_actions/index';
 import { withRouter, useParams } from 'react-router-dom';
+import ChannelEdditImgModal from '../jay_components/ChannelEdditImgModal.js';
 
 function PodcasterDashboardHome(props) {
   const { channel_data } = props;
-  let { podcaster_id } = useParams();
+  const { podcaster_id } = useParams();
   const [editTargrt, setEditTargrt] = useState('');
   const [editInputData, setEditInputData] = useState({});
+  const [editImgModalShow, setEditImgModalShow] = useState(false);
+
+  const transTermToChinese = (cate_term) => {
+    let tempCateTerm = cate_term.toLowerCase();
+    switch (tempCateTerm) {
+      case 'news':
+        return '新聞';
+        break;
+      case 'society':
+        return '故事';
+        break;
+      case 'education':
+        return '教育';
+        break;
+      case 'health':
+        return '健康';
+        break;
+      case 'sports':
+        return '運動';
+        break;
+      case 'technology':
+        return '科技';
+        break;
+      case 'business':
+        return '商業';
+        break;
+      case 'entertainment':
+        return '娛樂';
+        break;
+      default:
+        return '無此';
+    }
+  };
 
   const handleSubmit = async () => {
     const formData = new FormData();
@@ -41,10 +75,24 @@ function PodcasterDashboardHome(props) {
           <div className="container" key={index}>
             <div className="row justify-content-center">
               <div className="jay-podcastImgArea my-3">
-                <img src={item.podcaster_img} alt="" />
+                <img
+                  src={
+                    item.podcaster_img.indexOf('http') !== -1
+                      ? item.podcaster_img
+                      : `http://localhost:3000/images/podcaster_imgs/${item.podcaster_img}`
+                  }
+                  alt=""
+                />
               </div>
               <div className="col-12 text-center">
-                <button className="btn btn-primary btn-sm">更換封面</button>
+                <button
+                  className="btn btn-primary btn-sm"
+                  onClick={() => {
+                    setEditImgModalShow(true);
+                  }}
+                >
+                  更換封面
+                </button>
               </div>
             </div>
             <hr className="jay-dashboard-hr" />
@@ -243,18 +291,256 @@ function PodcasterDashboardHome(props) {
                   </tr>
                   <tr>
                     <th scope="row">頻道類別</th>
-                    <td>{item.channel_catagory}</td>
-                    <td>
-                      <a
-                        href="javascript"
-                        onClick={(event) => {
-                          event.preventDefault();
-                          setEditTargrt('edit_channel_catagory');
-                        }}
-                      >
-                        編輯
-                      </a>
-                    </td>
+                    {editTargrt === 'edit_channel_catagory' ? (
+                      <>
+                        <td className=" d-flex justify-content-around h-100">
+                          <div className="form-check">
+                            <input
+                              className="form-check-input mr-3"
+                              type="radio"
+                              name="channel_catagory"
+                              id="News"
+                              value="News"
+                              checked={
+                                editInputData.channel_catagory === 'News'
+                                  ? true
+                                  : false
+                              }
+                              onChange={(event) => {
+                                let copyData = { ...editInputData };
+                                copyData.channel_catagory = event.target.value;
+                                setEditInputData(copyData);
+                              }}
+                            />
+                            <label
+                              className="form-check-label mr-3"
+                              htmlFor="News"
+                            >
+                              新聞
+                            </label>
+                          </div>
+                          <div className="form-check">
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              name="channel_catagory"
+                              value="Technology"
+                              id="Technology"
+                              checked={
+                                editInputData.channel_catagory === 'Technology'
+                                  ? true
+                                  : false
+                              }
+                              onChange={(event) => {
+                                let copyData = { ...editInputData };
+                                copyData.channel_catagory = event.target.value;
+                                setEditInputData(copyData);
+                              }}
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor="Technology"
+                            >
+                              科技
+                            </label>
+                          </div>
+                          <div className="form-check">
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              name="channel_catagory"
+                              value="Sports"
+                              id="Sports"
+                              checked={
+                                editInputData.channel_catagory === 'Sports'
+                                  ? true
+                                  : false
+                              }
+                              onChange={(event) => {
+                                let copyData = { ...editInputData };
+                                copyData.channel_catagory = event.target.value;
+                                setEditInputData(copyData);
+                              }}
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor="Sports"
+                            >
+                              運動
+                            </label>
+                          </div>
+                          <div className="form-check">
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              name="channel_catagory"
+                              value="Entertainment"
+                              id="Entertainment"
+                              checked={
+                                editInputData.channel_catagory ===
+                                'Entertainment'
+                                  ? true
+                                  : false
+                              }
+                              onChange={(event) => {
+                                let copyData = { ...editInputData };
+                                copyData.channel_catagory = event.target.value;
+                                setEditInputData(copyData);
+                              }}
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor="Entertainment"
+                            >
+                              娛樂
+                            </label>
+                          </div>
+                          <div className="form-check">
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              name="channel_catagory"
+                              value="Society"
+                              id="Society"
+                              checked={
+                                editInputData.channel_catagory === 'Society'
+                                  ? true
+                                  : false
+                              }
+                              onChange={(event) => {
+                                let copyData = { ...editInputData };
+                                copyData.channel_catagory = event.target.value;
+                                setEditInputData(copyData);
+                              }}
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor="Society"
+                            >
+                              故事
+                            </label>
+                          </div>
+                          <div className="form-check">
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              name="channel_catagory"
+                              value="Business"
+                              id="Business"
+                              checked={
+                                editInputData.channel_catagory === 'Business'
+                                  ? true
+                                  : false
+                              }
+                              onChange={(event) => {
+                                let copyData = { ...editInputData };
+                                copyData.channel_catagory = event.target.value;
+                                setEditInputData(copyData);
+                              }}
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor="Business"
+                            >
+                              商業
+                            </label>
+                          </div>
+                          <div className="form-check">
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              name="channel_catagory"
+                              value="Education"
+                              id="Education"
+                              checked={
+                                editInputData.channel_catagory === 'Education'
+                                  ? true
+                                  : false
+                              }
+                              onChange={(event) => {
+                                let copyData = { ...editInputData };
+                                copyData.channel_catagory = event.target.value;
+                                setEditInputData(copyData);
+                              }}
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor="Education"
+                            >
+                              教育
+                            </label>
+                          </div>
+                          <div className="form-check">
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              name="channel_catagory"
+                              value="Health"
+                              id="Health"
+                              checked={
+                                editInputData.channel_catagory === 'Health'
+                                  ? true
+                                  : false
+                              }
+                              onChange={(event) => {
+                                let copyData = { ...editInputData };
+                                copyData.channel_catagory = event.target.value;
+                                setEditInputData(copyData);
+                              }}
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor="Health"
+                            >
+                              健康
+                            </label>
+                          </div>
+                        </td>
+                        <td>
+                          <a
+                            className=" text-info"
+                            href="javascript"
+                            onClick={(event) => {
+                              event.preventDefault();
+                              setEditTargrt('');
+                              handleSubmit();
+                            }}
+                          >
+                            確認
+                          </a>
+                          <br />
+                          <br />
+                          <a
+                            className=" text-danger"
+                            href="javascript"
+                            onClick={(event) => {
+                              event.preventDefault();
+                              setEditTargrt('');
+                              let copyData = { ...editInputData };
+                              copyData.channel_catagory = item.channel_catagory;
+                              setEditInputData(copyData);
+                            }}
+                          >
+                            取消
+                          </a>
+                        </td>
+                      </>
+                    ) : (
+                      <>
+                        <td>{transTermToChinese(item.channel_catagory)}</td>
+                        <td>
+                          <a
+                            href="javascript"
+                            onClick={(event) => {
+                              event.preventDefault();
+                              setEditTargrt('edit_channel_catagory');
+                            }}
+                          >
+                            編輯
+                          </a>
+                        </td>
+                      </>
+                    )}
                   </tr>
                   <tr>
                     <th scope="row">RSS連結</th>
@@ -384,6 +670,12 @@ function PodcasterDashboardHome(props) {
           </div>
         );
       })}
+      <ChannelEdditImgModal
+        show={editImgModalShow}
+        onHide={() => setEditImgModalShow(false)}
+        editInputData={editInputData}
+        setEditInputData={setEditInputData}
+      />
     </>
   );
 }

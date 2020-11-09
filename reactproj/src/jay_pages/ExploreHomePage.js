@@ -354,7 +354,14 @@ function ExploreHomePage(props) {
                         );
                       }}
                     >
-                      <img src={item.podcaster_img} alt="" />
+                      <img
+                        src={
+                          item.podcaster_img.indexOf('http') !== -1
+                            ? item.podcaster_img
+                            : `http://localhost:3000/images/podcaster_imgs/${item.podcaster_img}`
+                        }
+                        alt=""
+                      />
                     </a>
                   </div>
                 </div>
@@ -393,7 +400,14 @@ function ExploreHomePage(props) {
                     </div>
                     <div className="jay-section2-part2">
                       <div className="jay-channel-rating-pic-part2">
-                        <img src={item.podcaster_img} alt="" />
+                        <img
+                          src={
+                            item.podcaster_img.indexOf('http') !== -1
+                              ? item.podcaster_img
+                              : `http://localhost:3000/images/podcaster_imgs/${item.podcaster_img}`
+                          }
+                          alt=""
+                        />
                       </div>
                     </div>
                     <div className="jay-section2-part3">

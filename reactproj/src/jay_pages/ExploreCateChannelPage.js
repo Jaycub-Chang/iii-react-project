@@ -192,7 +192,14 @@ function ExploreCateChannelPage(props) {
                             <h4>{index + 1}</h4>
                           </div>
                           <div className="jay-hot-list-cate-channel-pic mx-3">
-                            <img src={item.podcaster_img} alt="" />
+                            <img
+                              src={
+                                item.podcaster_img.indexOf('http') !== -1
+                                  ? item.podcaster_img
+                                  : `http://localhost:3000/images/podcaster_imgs/${item.podcaster_img}`
+                              }
+                              alt=""
+                            />
                           </div>
                           <div className="jay-hot-list-cate-channel-info">
                             <h6>{item.channel_title}</h6>
@@ -213,7 +220,11 @@ function ExploreCateChannelPage(props) {
                       <div className="jay-svg-area col-6 position-relative">
                         <div className="jay-svg-img-area position-absolute">
                           <img
-                            src={item.podcaster_img}
+                            src={
+                              item.podcaster_img.indexOf('http') !== -1
+                                ? item.podcaster_img
+                                : `http://localhost:3000/images/podcaster_imgs/${item.podcaster_img}`
+                            }
                             alt=""
                             onClick={() => {
                               props.history.push(
@@ -232,7 +243,7 @@ function ExploreCateChannelPage(props) {
                           <g className="heart-loader__group">
                             <path
                               fill="none"
-                              strokeWidth="1.8"
+                              strokeWidth="0.5"
                               d="M13 56v39h40V56z"
                               className="heart-loader__square"
                             ></path>
@@ -296,7 +307,14 @@ function ExploreCateChannelPage(props) {
                         }}
                       >
                         <div className="cate-all-channel-pic">
-                          <img src={item.podcaster_img} alt="" />
+                          <img
+                            src={
+                              item.podcaster_img.indexOf('http') !== -1
+                                ? item.podcaster_img
+                                : `http://localhost:3000/images/podcaster_imgs/${item.podcaster_img}`
+                            }
+                            alt=""
+                          />
                         </div>
                         <p className="pt-2">{item.channel_title}</p>
                       </a>

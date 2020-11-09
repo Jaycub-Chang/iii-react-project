@@ -32,7 +32,7 @@ router.get('/channel_info/api/:podcaster_id?', async (req, res) => {
 });
 
 // 修改頻道資料
-router.post('/channel_info/edit/api', upload_audio_img.single('image_file'), async (req, res) => {
+router.post('/channel_info/edit/api', upload_audio_img.single('podcaster_img'), async (req, res) => {
 
     const sql = "UPDATE `podcast_channel_info` SET `podcaster_img`=?,`channel_title`=?,`podcaster_description`=?,`channel_catagory`=?,`owner_email`=?,`channel_summary`=?,`channel_subtitle`=?,`channel_rss_link`=? WHERE `podcaster_id`=?";
     const { podcaster_img, podcaster_id, channel_title, podcaster_description, channel_catagory, owner_email, channel_summary, channel_subtitle, channel_rss_link } = { ...req.body };
