@@ -4,18 +4,18 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 //components
-import MyNavbar from './jay_components/MyNavbar.js';
-import ScrollToTop from './jay_components/ScrollToTop.js';
-import MainContent from './jay_components/MainContent.js';
+import MyNavbar from './jay/jay_components/MyNavbar.js';
+import ScrollToTop from './jay/jay_components/ScrollToTop.js';
+import MainContent from './jay/jay_components/MainContent.js';
 import { Layout } from 'antd';
 
 //pages
-import PodcasterDashboardHome from './jay_pages/PodcasterDashboardHome';
-import AudioPlayer from './jay_components/AudioPlayer.js';
-import PodcasterAudioList from './jay_pages/PodcasterAudioList.js';
-import ExploreHomePage from './jay_pages/ExploreHomePage.js';
-import ExploreCateChannelPage from './jay_pages/ExploreCateChannelPage.js';
-import ChannelPage from './jay_pages/ChannelPage.js';
+import PodcasterDashboardHome from './jay/jay_pages/PodcasterDashboardHome';
+import AudioPlayer from './jay/jay_components/AudioPlayer.js';
+import PodcasterAudioList from './jay/jay_pages/PodcasterAudioList.js';
+import ExploreHomePage from './jay/jay_pages/ExploreHomePage.js';
+import ExploreCateChannelPage from './jay/jay_pages/ExploreCateChannelPage.js';
+import ChannelPage from './jay/jay_pages/ChannelPage.js';
 
 function App() {
   const [globalAudioArry, setGlobalAudioArry] = useState([]);
