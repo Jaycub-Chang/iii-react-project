@@ -23,14 +23,14 @@
     filter: brightness(0.7);
 }
 .channel-page-audio-list p{
-    max-width: 500px;
+    max-width:65%;
     filter: brightness(0.8);
 }
 .channel-page-audio-list{
     background-color: rgba($color: #F8F8F8, $alpha: 0.1);
 }
 .channel-page-audio-list h6{
-    max-width: 500px;
+    max-width: 65%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -45,7 +45,7 @@
 .channel-audio-list-icon{
     color: rgba($color: #F8F8F8, $alpha: 1.0);
     top: 50%;
-    z-index: 10;
+    z-index: 9;
     transform: translate(0, -50%);
 }
 .channel-audio-list-icon:hover{
@@ -53,4 +53,43 @@
     color: #2690DF;
 }
 
+.informAudioActionModal{
+    position: fixed !important;
+    top: 50%;
+    left: 50%;
+    z-index: 99;
+}
 
+@media (max-width: 991.98px) {
+    .jay-side-bar{
+        display: flex !important;
+        flex-wrap: wrap;
+    }
+    .jay-side-bar div.col-12.col-sm.mb-5{
+        padding-left: 5rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .jay-side-bar{
+        display: flex !important;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
+    .jay-side-bar div.col-12.col-sm.mb-5{
+        padding-left: 0;
+    }
+    .channel-page-audio-list div:nth-child(2){
+        top: 20% !important;
+        left: 79% !important;
+    }
+    .channel-page-audio-list div:nth-child(3){
+        top: 50% !important;
+        left: 80% !important;
+    }
+    .channel-page-audio-list div:nth-child(4){
+        top: 80% !important;
+        left: 80% !important;
+    }
+}

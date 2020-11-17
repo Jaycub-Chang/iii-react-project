@@ -1,6 +1,7 @@
 span.loop-btn,
 span.reload-btn,
-.rc-slider-handle{
+.rc-slider-handle,
+.audio-download{
     display: none !important;
 }
 
@@ -12,3 +13,6 @@ span.reload-btn,
     color: #fff;
 }
 
+.react-jinke-music-player-mobile{
+    z-index: 1000;
+}

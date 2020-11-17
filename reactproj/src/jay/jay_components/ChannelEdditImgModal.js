@@ -3,15 +3,17 @@ import { connect } from 'react-redux';
 import 'react-jinke-music-player/assets/index.css';
 
 // action、props
-import { editChannelAsync, initalDashboardAsync } from '../jay_actions/index';
+import {
+  editChannelAsync,
+  initalDashboardAsync,
+} from '../../jay_actions/index';
 import { withRouter, useParams } from 'react-router-dom';
 
 // bootstrap
 import { Modal } from 'react-bootstrap';
 
 function ChannelEdditImgModal(props) {
-  const { editInputData } = props;
-  const { podcaster_id } = useParams();
+  const { editInputData, setIsLoading } = props;
   const [fileSrc, setFileSrc] = useState('');
   const [imgFile, setImgFile] = useState(null);
 
@@ -28,6 +30,7 @@ function ChannelEdditImgModal(props) {
   };
 
   const handleSubmit = async () => {
+    setIsLoading(true);
     const formData = new FormData();
     formData.append('podcaster_id', editInputData.podcaster_id);
     formData.append('channel_title', editInputData.channel_title);
@@ -44,7 +47,10 @@ function ChannelEdditImgModal(props) {
       imgFile === null ? editInputData.podcaster_img : imgFile
     );
     await props.editChannelAsync(formData);
-    await props.initalDashboardAsync(podcaster_id);
+    await props.initalDashboardAsync(props.member.sid);
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 500);
   };
 
   return (

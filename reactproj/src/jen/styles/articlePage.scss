@@ -1,0 +1,104 @@
+//ArticlePage CSS------------------
+.article-page-date {
+  font-size: 2.5rem;
+  margin-top: 19.3rem;
+  text-align: center;
+  // width: 14.5rem;
+  width: 25%;
+}
+
+.article-content-wrap {
+  // width: 63.25rem;
+  width: 75%;
+  .article-title {
+    font-size: 2.5rem;
+    font-weight: 500;
+    padding-bottom: 2.5rem;
+  }
+
+  .article-img {
+    width: 63.25rem;
+    height: 25.438rem;
+    overflow: hidden;
+    img {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .article-font-change {
+    margin: 2rem 0;
+    .title {
+      width: auto;
+    }
+    .fz-select {
+      margin: 0.3rem;
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      text-align: center;
+      background-color: #707070;
+    }
+    .fz-select:hover {
+      cursor: pointer;
+    }
+    .fz-select.active {
+      background-color: #f8f8f8;
+    }
+    .active {
+      border-bottom: none; //去除active設定的藍底線
+    }
+  }
+
+  .article-content-area {
+    width: 100%;
+    color: #f8f8f8;
+    line-height: 2.5rem;
+    letter-spacing: 1px;
+    margin-bottom: 4rem;
+    text-align: justify;
+    //使跳脫文字有作用
+    white-space: pre-wrap;
+  }
+
+  .article-page-category {
+    padding-bottom: 1rem;
+    border-bottom: solid 1px #707070;
+    display: flex;
+    align-items: baseline;
+
+    .span-category {
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+    a {
+      color: #f8f8f8;
+    }
+    a:hover {
+      color: #707070;
+    }
+    .span-clicks {
+      font-size: 0.8rem;
+    }
+  }
+
+  .article-page-others {
+    padding: 1.29rem 0 2rem 0;
+    .article-page-previous,
+    .article-page-next {
+      a {
+        color: #f8f8f8;
+        cursor: pointer;
+      }
+      a:hover {
+        color: #707070;
+      }
+    }
+    // .article-page-previous:hover,
+    // .article-page-next:hover {
+    //   a {
+    //     color: #707070;
+    //   }
+    //}
+  }
+}
