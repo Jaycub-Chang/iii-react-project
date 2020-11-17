@@ -1,0 +1,549 @@
+// $primary: #2690df;
+
+// $react-rater-link: #ccc !default; // color of star not rated
+// $react-rater-hover: #666 !default; // color of star on hover
+// $react-rater-active: #fadb28 !default; // color of star rated
+
+$thirdColor: #fc774c;
+$thirdColorBrighter: brighten($thirdColor, 85%);
+$baseSize: 16px;
+$Light: #f8f8f8;
+$Dark: #232d2f;
+$DarkGray: #44494a;
+$DarkLightGray: #707070;
+$DarkOpacity60: rgba($Dark, 0.6);
+@function font($level: 1) {
+  @return $baseSize * $level;
+}
+$react-rater-active: #fadb28 !default;
+@import 'react-rater/lib/react-rater.scss';
+
+// @import '~bootstrap/scss/bootstrap.scss';
+.reBgWhite {
+  background-color: #fff;
+  padding-bottom: 3rem;
+}
+
+.head2 {
+  font-size: font(2);
+}
+.head5 {
+  font-size: font(1.5);
+}
+.body3 {
+  font-size: font(1);
+}
+.subtitle1 {
+  font-size: font(1.375);
+}
+// a,
+// a:hover {
+//   color: #232d2f;
+// }
+.caption {
+  font-size: font(0.75);
+}
+//font-color
+.dark {
+  color: $Dark;
+}
+.light {
+  color: $Light;
+}
+
+// btn
+.reOutlineFocus:focus {
+  box-shadow: 0 0 0 0 transparent !important;
+  text-decoration: none !important;
+}
+.reOutlineFocus:hover {
+  box-shadow: 0 0 0 0 transparent !important;
+  text-decoration: none !important;
+}
+.re-btn-color {
+  background-color: #2690df !important;
+}
+.re-btn-border-color {
+  border: 1px solid #2690df !important;
+  color: #2690df;
+}
+.re-btn-border-color:hover {
+  background-color: #2690df;
+  color: #fff;
+}
+.btn-rounded {
+  border-radius: calc(3rem * 0.5);
+  margin-right: 1.8rem;
+}
+.btn-vital {
+  background-color: $thirdColor !important;
+  color: #fff !important;
+}
+.btn-vital:hover {
+  background-color: darken($thirdColor, 10%);
+  // filter: brightness(85%);
+  color: #fff;
+}
+.re-btn {
+  min-width: 10rem;
+  height: 3rem;
+  font-size: font(1.25);
+  padding: 0 0.5rem;
+}
+
+.wrap {
+  width: 100%;
+  height: 44rem;
+  overflow: hidden;
+  position: relative;
+  // background-color: darksalmon;
+}
+
+.container.pd-container {
+  max-width: 1440px;
+}
+.reBreadcrumbWrap {
+  margin: 2rem 3rem;
+}
+
+.reBreadcrumb {
+  background-color: transparent !important;
+  padding: 0;
+}
+.reBreadcrumbItem:hover {
+  color: #2690df;
+  // text-decoration: underline;
+}
+// -- space --
+.rePaddingX0 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  border: none !important;
+}
+.rePaddingX1 {
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
+.rePt-6rem {
+  padding-top: 6rem;
+}
+
+// -- banner start --
+.banner {
+  height: 50vh;
+}
+
+.banner-slogan-title {
+  color: #f8f8f8;
+  padding: 20rem 0 2rem 0rem;
+}
+.banner-slogan-title2 {
+  color: #f8f8f8;
+  padding: 20rem 0 2rem 40rem;
+}
+.banner-slogan-span {
+  color: #f8f8f8;
+}
+.banner-slogan-span2 {
+  color: #f8f8f8;
+  padding: 0 0 0 50rem;
+}
+.banner-anim-elem .bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+// -- banner end --
+
+// -- search input start--
+.searchContainer {
+  width: 60rem;
+  vertical-align: middle;
+  white-space: nowrap;
+  position: relative;
+}
+.searchContainer input.reSearch {
+  width: 60rem;
+  height: 4rem;
+  background: #f8f8f8;
+  border: none;
+  font-size: 1rem;
+  color: #232d2f;
+  padding-left: 45px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+input.reSearch:focus {
+  outline: none;
+  box-shadow: 0 0 1px 1px #707070;
+}
+// .inputField {
+//   min-width: 70rem;
+//   height: 4rem;
+//   border-radius: 5px;
+//   border: 1px solid #ccc;
+//   padding-left: 1rem;
+// }
+
+.searchInput {
+  padding-top: 6rem;
+}
+
+.searchBtn {
+  width: 10rem;
+  height: 4rem;
+  border-radius: 5px;
+  position: absolute;
+  right: 0px;
+  color: #f8f8f8 !important;
+}
+// -- banner end --
+// --tab start --
+.pt-5rem {
+  padding-top: 5rem;
+}
+.MuiTabs-flexContainer {
+  background-color: #fff;
+}
+.MuiBox-root {
+  background-color: #fff;
+  padding: 0rem !important;
+}
+
+// -- tab end --
+// -- side bar start --
+.sidebar {
+  min-width: 18rem;
+}
+.test-box1 {
+  width: 15rem;
+  height: 500px;
+  background-color: darkseagreen;
+}
+.sidebar h2 {
+  color: $Dark;
+  font-weight: normal;
+}
+.sidebar h5 {
+  color: $Dark;
+  font-weight: bold;
+}
+.bg-test {
+  background-color: #fff;
+  border: none;
+}
+.reSidebarTitle {
+  margin: 4rem 2rem 2rem 0;
+}
+.reArrowSpace {
+  margin-right: 1rem;
+}
+.turnArrow {
+  animation: turnarrow 0.5s;
+  animation-fill-mode: forwards;
+}
+@keyframes turnarrow {
+  form {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(90deg);
+  }
+}
+
+// -- card start --
+.reHidden {
+  display: none !important;
+}
+.demo-content.d-flex.flex-wrap.reHidden {
+  display: none !important;
+}
+
+// .pdCard {
+//   max-width: 20rem;
+//   padding: 0;
+// }
+.pdCard:hover {
+  text-decoration: none;
+}
+// .col-lg-4.pdCard {
+//   // padding: 1rem;
+// }
+.cardWrap {
+  // min-height: 25rem;
+  box-shadow: 0px 0px 5px 2px #eee;
+  border-radius: 5px;
+  margin: 0rem 0rem 3rem;
+  padding: 1rem 1.5rem;
+  transition: all 0.1s ease-out;
+}
+.cardWrap:hover {
+  transform: translate(0.5px, 1px);
+  box-shadow: 0px 1px 8px 5px #eee;
+}
+
+.cardBody {
+  text-align: center;
+  height: 7rem;
+  position: relative;
+  padding: 1rem;
+}
+.oneLine {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.cardBody-activity {
+  // text-align: center;
+  height: 9rem;
+  position: relative;
+  padding: 16px 0;
+}
+.pdPrice {
+  position: absolute;
+  bottom: 0rem;
+  right: 1rem;
+  // left: 50%;
+  // transform: translateX(-50%);
+}
+.testTrans {
+  transition: all 2s ease-in;
+}
+
+.pdContentPart {
+  margin: 0 0 0 3rem;
+}
+.addCartBtn {
+  width: 100%;
+  border-radius: 40px !important;
+  margin: 0.75rem auto 0rem;
+}
+
+// -- card end --
+
+// *** product item ***
+// -- bread --
+// .pdItemBread {
+//   margin-top: 10crem;
+// }
+// -- pagination --
+.rePagination {
+  margin-bottom: 5.5rem;
+}
+.MuiPaginationItem-textPrimary.Mui-selected {
+  background-color: #2690df !important;
+}
+
+// *** product Detail ***
+// -- product top start--
+.re-spinnerArea {
+  position: relative;
+  height: 100vh;
+}
+.informCartModal {
+  text-align: center;
+  position: fixed !important;
+  width: 105%;
+  top: 3.9rem;
+  right: -2px;
+  z-index: 99;
+  background-color: #707070a6;
+  color: #fff;
+  border: none;
+}
+.pdItemPage {
+  margin-bottom: 5rem;
+}
+.pdPicfield {
+  // background-color: turquoise;
+  width: 100%;
+  // height: 50vh;
+}
+.pdMainfield {
+  // background-color: $primary;
+  width: 100%;
+  // height: 50vh;
+}
+
+.pdMainImg {
+  width: 100%;
+  height: 30rem;
+  overflow: hidden;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.pdSubImgs {
+  width: 5rem !important;
+  height: 5rem;
+  overflow: hidden;
+  object-fit: contain;
+}
+
+.rec.rec-arrow {
+  background-color: #fff;
+  border: none;
+  outline: none;
+}
+.rec.rec-arrow:hover {
+  background-color: #2690df;
+}
+.rec.rec-arrow:disabled {
+  visibility: hidden;
+}
+
+.pdMainFieldPrice {
+  color: $Dark;
+  padding-top: 1rem;
+}
+.commentStarPart {
+  width: 15rem;
+}
+.pdMainFieldStars {
+  color: $DarkOpacity60;
+}
+
+.pdMainFieldLB {
+  height: 9rem;
+}
+.pdMainFieldLT {
+  padding-top: 3rem;
+}
+
+// -- product top end --
+// -- ItemTabBar start --
+.ItemTabBar {
+  background-color: $DarkGray;
+  width: 100%;
+  height: 3rem;
+  // margin-top: 4rem;
+  z-index: 1;
+}
+.re-tabs {
+  width: 32rem;
+  height: 3rem;
+  text-align: center;
+  font-size: font(1.2);
+  line-height: 3rem;
+  color: rgba($Light, 0.3);
+  // background-color: turquoise;
+}
+.separator {
+  width: 2px;
+  height: 2rem;
+  background-color: $DarkLightGray;
+}
+.tabsAct {
+  box-sizing: border-box;
+  color: $Light;
+  position: relative;
+  // border-bottom: 5px solid $primary;s
+}
+.tabsAct::after {
+  content: '';
+  width: 10rem;
+  animation: tabExpend 0.2s ease-out;
+  height: 4px;
+  background-color: #2690df;
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 5px;
+}
+
+@keyframes tabExpend {
+  from {
+    width: 0;
+  }
+  to {
+    width: 10rem;
+  }
+}
+
+.tabFixed {
+  position: fixed;
+  top: 4rem;
+}
+
+// -- ItemTabBar end --
+// -- Product Intro --
+.pdIntroPart {
+  padding: 2rem 0rem;
+  background: url('/reckie_img/bg-pdintro.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+}
+.contentHeight2 {
+  padding: 4rem 0 2rem;
+}
+.contentHeight3 {
+  padding: 4rem 0 2rem;
+}
+.pdIntroImgField {
+  // width: 100%;
+  max-height: 30rem;
+  overflow: hidden;
+}
+.rec.rec-arrow.rec-arrow-right,
+.rec.rec-arrow.rec-arrow-left {
+  background-color: #fff;
+}
+.rec.rec-arrow.rec-arrow-right:hover,
+.rec.rec-arrow.rec-arrow-left:hover {
+  background-color: #707070;
+}
+.contentPics {
+  // width: 100%;
+  background-color: #f8f8f8f5;
+  z-index: 0;
+  object-fit: contain;
+  object-position: center center;
+}
+.pdIntroTextSpace {
+  margin: 2rem 0;
+  padding: 0 10rem;
+  line-height: 1.8rem;
+}
+.table-striped {
+  overflow: hidden;
+}
+
+// -- Comment start --
+.PdComment {
+  border-bottom: 1px solid #ccc;
+}
+.separateLine {
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px solid #ccc;
+  // margin: 1rem 0;
+}
+.commentAvatarPart {
+  padding: 3rem;
+}
+.commentAvatar {
+  width: 8rem;
+  height: 8rem;
+  border: 1px solid #ccc;
+  border-radius: 5rem;
+  overflow: hidden;
+}
+.commentPdPic {
+  width: 6rem;
+  height: 6rem;
+  // border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 1px 1px 4px 1px #ddd;
+  object-fit: contain;
+  object-position: center center;
+  overflow: hidden;
+}
+// -- Comment end --
