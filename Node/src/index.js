@@ -11,14 +11,6 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-<<<<<<< HEAD
-
-app.use('/podcaster_dashboard', require(__dirname + '/routes/podcaster_dashboard'));
-
-app.get('/', function (req, res) {
-    // res.send('Hello World!');
-    res.send('已開啟express')
-=======
 //reckie區
 app.use('/products',require(__dirname + '/routes/products'));
 
@@ -58,7 +50,6 @@ app.use('/msg', require(__dirname + '/routes/msgBoard'));
 
 app.get("/", function (req, res) {
   res.send("已開啟express");
->>>>>>> jay_dev
 });
 
 app.get("/try-db", (req, res) => {
@@ -67,28 +58,7 @@ app.get("/try-db", (req, res) => {
   });
 });
 
-<<<<<<< HEAD
-
-// app.get('/add_channel_rating', async (req, res) => {
-//     for (let i = 0; i < 110; i++) {
-//         let podcaster_id = (i + 1);
-//         for (let k = 0; k < 10; k++) {
-//             let reviewer_id = (k + 1);
-//             let randomScore = Math.floor(Math.random() * (5 - 1 + 1) + 1);
-//             const sql = "INSERT INTO `channel_rating`(`reviewer_id`, `podcaster_id`, `score`) VALUES (?,?,?)";
-//             const [results] = await db.query(sql, [reviewer_id, podcaster_id, randomScore]);
-//         };
-//     };
-//     res.send('完成');
-// });
-
-
-
-
-app.use(express.static(__dirname + '/../public/'));
-=======
 app.use(express.static(__dirname + "/../public/"));
->>>>>>> jay_dev
 
 app.use((req, res) => {
   res.type("text/plain");
